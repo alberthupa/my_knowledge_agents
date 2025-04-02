@@ -1,0 +1,131 @@
+{
+  "nodes": {
+    "- Knowledge-intensive benchmarks": {
+      "attributes": {}
+    },
+    "- Large language models (LLMs)": {
+      "attributes": {}
+    },
+    "mGTE (Zhang et al., 2024c)": {
+      "attributes": {}
+    },
+    "- Closed-weight models": {
+      "attributes": {}
+    },
+    "- Error patterns": {
+      "attributes": {}
+    },
+    "- Knowledge base": {
+      "attributes": {}
+    },
+    "- Stochastic error ascent (SEA)": {
+      "attributes": {}
+    },
+    "- Dynabench": {
+      "attributes": {}
+    },
+    "- UniGen": {
+      "attributes": {}
+    },
+    "vector quantization": {
+      "attributes": {
+        "definition": "A technique for encoding vectors, used in conjunction with FAISS for embedding management."
+      }
+    },
+    "gpt-4o (OpenAI et al., 2024)": {
+      "attributes": {}
+    },
+    "- Task Me Anything": {
+      "attributes": {}
+    },
+    "Qwen2.5-72B-Instruct (Qwen et al., 2025)": {
+      "attributes": {}
+    },
+    "inverted file system": {
+      "attributes": {
+        "definition": "A data structure used for efficient retrieval in FAISS."
+      }
+    },
+    "- Human evaluation": {
+      "attributes": {}
+    },
+    "- EvalTree": {
+      "attributes": {}
+    },
+    "- Automated Capability Discovery (ACD)": {
+      "attributes": {}
+    },
+    "- Sentence Transformers (Reimers & Gurevych, 2019)": {
+      "attributes": {}
+    },
+    "LDA (Blei et al., 2003)": {
+      "attributes": {}
+    },
+    "open-weight models": {
+      "attributes": {
+        "definition": "Models where internal parameters are accessible and modifiable, but simulated in the closed-weight setting for SEA."
+      }
+    },
+    "- DAG (Directed Acyclic Graph)": {
+      "attributes": {}
+    },
+    "gpt-4o-mini (OpenAI, 2024a)": {
+      "attributes": {}
+    },
+    "- Benchmark Self-Evolving": {
+      "attributes": {}
+    },
+    "DeepSeek-series models": {
+      "attributes": {
+        "definition": "Series of models including DeepSeek-V3 and DeepSeek-R1 used for testing in SEA."
+      }
+    },
+    "- Wikipedia": {
+      "attributes": {}
+    },
+    "FAISS (Douze et al., 2024)": {
+      "attributes": {}
+    },
+    "- AutoBencher": {
+      "attributes": {}
+    },
+    "DeepSeek-R1": {
+      "attributes": {
+        "definition": "A model in the DeepSeek-series used for evaluation in SEA framework."
+      }
+    },
+    "DeepInfra": {
+      "attributes": {
+        "definition": "A platform for hosting models such as Qwen2.5-72B-Instruct and Llama-3.3-70B-Instruct."
+      }
+    },
+    "Llama-3.3-70B-Instruct (Grattafiori et al., 2024)": {
+      "attributes": {}
+    },
+    "- Multiple-choice questions": {
+      "attributes": {}
+    },
+    "- Paragraphs": {
+      "attributes": {}
+    },
+    "R1-Distill-Llama-70B (DeepSeek-AI et al., 2025)": {
+      "attributes": {}
+    },
+    "DeepSeek-V3 (Liu et al., 2024)": {
+      "attributes": {}
+    },
+    "- DyVal": {
+      "attributes": {}
+    },
+    "- Hallucinations": {
+      "attributes": {}
+    },
+    "o1-mini (OpenAI, 2024b)": {
+      "attributes": {}
+    },
+    "- Knowledge deficiencies": {
+      "attributes": {}
+    }
+  },
+  "edges": []
+}

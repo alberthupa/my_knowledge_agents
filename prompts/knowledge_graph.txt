@@ -1,0 +1,29 @@
+Analyze the text from '{filename}' to extract:
+1. ATTRIBUTES: Key properties/characteristics of each entity
+2. RELATIONS: How entities are connected to each other
+
+Entities found in document: {entity_list}
+
+For each entity, identify important attributes like definitions, categories, properties, etc.
+For relations, specify which entities are connected and how (e.g., "Entity A is part of Entity B", "Entity C depends on Entity D").
+
+FORMAT YOUR RESPONSE AS JSON:
+{{
+  "entities": {{
+    "Entity1": {{
+      "attributes": {{"attribute1": "value1", "attribute2": "value2"}}
+    }},
+    "Entity2": {{
+      "attributes": {{"attribute1": "value1", "attribute2": "value2"}}
+    }}
+  }},
+  "relations": [
+    {{"source": "Entity1", "relation": "relates to", "target": "Entity2"}},
+    {{"source": "Entity2", "relation": "depends on", "target": "Entity3"}}
+  ]
+}}
+
+Text to analyze:
+---
+{document_text}
+---

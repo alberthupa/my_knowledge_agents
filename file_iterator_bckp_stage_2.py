@@ -390,8 +390,7 @@ New Entities (only from this window):"""
 # --- Main Execution Block ---
 if __name__ == "__main__":
     # --- Parameters ---
-    # llm_model = "gemini-2.0-flash"
-    llm_model = "gpt-4o"
+    llm_model = "gemini-2.0-flash"
     source_directory = "sources"  # Directory containing files
     max_tokens_per_window = 4000  # T: Max tokens in a window
     num_runs_per_function = 1  # N: Number of times to run each approach

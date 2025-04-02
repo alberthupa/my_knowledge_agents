@@ -12,11 +12,13 @@ llm_location:
     - databricks-meta-llama-3-1-70b-instruct
   groq:
     - llama-3.1-8b-instant
+    - llama-3.3-70b-versatile
     - llama3-groq-70b-8192-tool-use-preview
     - deepseek-r1-distill-llama-70b
   google_ai_studio:
     - gemini-1.5-pro
     - gemini-exp-1206
+    - gemini-2.0-flash
     - gemini-2.0-flash-exp
     - gemini-2.0-flash-thinking-exp-01-21
     - gemini-2.5-pro-exp-03-25
