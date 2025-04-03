@@ -1,11 +1,15 @@
-Analyze the text from '{filename}' to extract:
+Analyze WINDOW {window_num}/{total_windows} from '{file_name}' to extract:
 1. ATTRIBUTES: Key properties/characteristics of each entity
 2. RELATIONS: How entities are connected to each other
 
 Entities found in document: {entity_list}
 
+PREVIOUSLY IDENTIFIED RELATIONS:
+{existing_relations_text}
+
 For each entity, identify important attributes like definitions, categories, properties, etc.
 For relations, specify which entities are connected and how (e.g., "Entity A is part of Entity B", "Entity C depends on Entity D").
+ONLY describe relations and attributes that are evident in THIS window.
 
 FORMAT YOUR RESPONSE AS JSON:
 {{
@@ -23,7 +27,5 @@ FORMAT YOUR RESPONSE AS JSON:
   ]
 }}
 
-Text to analyze:
----
-{document_text}
+Text window to analyze:
 ---

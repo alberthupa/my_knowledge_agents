@@ -1,6 +1,6 @@
-Context: The following entities have been extracted from the document '{filename}' so far: {current_entities}
+Context: The following entities have been extracted from the document '{file_name}' so far: {current_entities}
 
-Task: Analyze the text window below, asnwer question:  what entities (key concepts) occur in this text in it? 
+Task: Analyze the text window below, asnwer question: what is this text about? What are the most imporant entities (key concepts) in it? 
 Do not include persons or organizations.
 Present entities ONLY in this window that are NOT already listed in the context above. List the new entities found in this window, one per line. If no new entities are found in this specific window, respond with the single word "None".
 
