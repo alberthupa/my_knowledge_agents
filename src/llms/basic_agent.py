@@ -3,10 +3,10 @@ import re
 import typing
 import yaml
 import os
-import re  # Added missing import
+#import re  
 
 from tenacity import retry, wait_random_exponential, stop_after_attempt, wait_fixed
-from llms.llm_clients import create_llm_client  # Updated import
+from src.llms.llm_clients import create_llm_client
 
 
 def translate_messages_from_openai_to_gemini(
@@ -32,7 +32,7 @@ def translate_messages_from_openai_to_gemini(
 class BasicAgent:
     def __init__(self):
         """Initializes the BasicAgent, loading configuration."""
-        config_path = os.path.join("llms", "llm_config.yaml")
+        config_path = os.path.join("src", "llms", "llm_config.yaml")
         try:
             with open(config_path, "r") as file:
                 config = yaml.safe_load(file)

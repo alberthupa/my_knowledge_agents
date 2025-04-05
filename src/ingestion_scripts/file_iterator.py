@@ -1,11 +1,16 @@
-# works, but ontology works on full file
 
 import os
 import tiktoken
-from pypdf import PdfReader  # Use pypdf instead of PyPDF2 if installing fresh
+from pypdf import PdfReader 
 import io
-from llms.basic_agent import BasicAgent  # Added import
+
 import json
+import sys
+import os
+
+from src.llms.basic_agent import BasicAgent
+
+
 
 # --- Constants ---
 ENCODING_NAME = "o200k_base"
@@ -334,7 +339,7 @@ def extract_entities_from_windows(
 
 
 # --- Process Single File Function ---
-def process_file(
+def search_docs_for_kg(
     llm_model: str,
     secondary_llm_model: str,
     file_path: str,
@@ -486,22 +491,84 @@ def process_file(
         return None
 
 
+def extract_kg_from_doc(
+    file_path: str,
+    llm_model: str = "gemini-2.0-flash",
+    secondary_llm_model: str = None,
+    max_tokens_per_window: int = 4000,
+    num_runs_per_function: int = 1,
+    overlap_tokens: int = 50,
+    output_dir: str = "tmp_knowledge_graph"
+):
+    """
+    Extract knowledge graph from a document and save it to JSON.
+    
+    Args:
+        file_path (str): Path to the file to process
+        llm_model (str): Primary LLM model to use
+        secondary_llm_model (str): Secondary LLM model for second run (if num_runs_per_function=2)
+        max_tokens_per_window (int): Maximum tokens per window (T)
+        num_runs_per_function (int): Number of runs per function (N)
+        overlap_tokens (int): Token overlap between windows (O)
+        output_dir (str): Directory to save the knowledge graph
+        
+    Returns:
+        dict: The extracted knowledge graph
+    """
+    print(f"\nExtracting knowledge graph from: {file_path}")
+    print(f"Parameters: T={max_tokens_per_window}, N={num_runs_per_function}, O={overlap_tokens}")
+    print(f"Primary LLM: {llm_model}")
+    if num_runs_per_function == 2 and secondary_llm_model:
+        print(f"Secondary LLM: {secondary_llm_model}")
+    
+    # Process the file to extract knowledge graph
+    knowledge_graph = search_docs_for_kg(
+        llm_model=llm_model,
+        secondary_llm_model=secondary_llm_model,
+        file_path=file_path,
+        T=max_tokens_per_window,
+        N=num_runs_per_function,
+        O=overlap_tokens,
+    )
+    
+    # Save the knowledge graph if it was created
+    if knowledge_graph:
+        # Add source_uri to all nodes and edges
+        base_name = os.path.basename(file_path)
+        
+        # Add source_uri to each node
+        for node_id in knowledge_graph["nodes"]:
+            knowledge_graph["nodes"][node_id]["source_uri"] = base_name
+        
+        # Add source_uri to each edge
+        for edge in knowledge_graph["edges"]:
+            edge["source_uri"] = base_name
+            
+        os.makedirs(output_dir, exist_ok=True)
+        output_file = os.path.join(output_dir, f"{base_name}.json")
+        
+        try:
+            with open(output_file, "w", encoding="utf-8") as f:
+                json.dump(knowledge_graph, f, indent=2)
+            print(f"Saved knowledge graph to {output_file}")
+        except Exception as e:
+            print(f"Error saving knowledge graph: {e}")
+    
+    return knowledge_graph
+
+
 # --- Main Execution Block ---
 if __name__ == "__main__":
     # --- Parameters ---
     llm_model = "gemini-2.0-flash"  # Primary model
     secondary_llm_model = "gpt-4o"  # Secondary model for N=2
-    # llm_model = "gpt-4o"
     source_directory = "sources"  # Directory containing files
     max_tokens_per_window = 4000  # T: Max tokens in a window
-    num_runs_per_function = 2  # N: Set to 1 or 2
+    num_runs_per_function = 1  # N: Set to 1 or 2
     overlap_tokens = 50  # O: Token overlap between windows
 
     print("--- Starting File Iterator ---")
-    print(
-        f"Parameters: Dir='{source_directory}', T={max_tokens_per_window}, N={num_runs_per_function}, O={overlap_tokens}"
-    )
-
+    
     # Check if prompts directory exists
     prompts_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "prompts")
     if not os.path.exists(prompts_dir):
@@ -527,29 +594,14 @@ if __name__ == "__main__":
         print(f"Error scanning directory {source_directory}: {e}")
         exit(1)
 
-    # Process the single file
-    knowledge_graph = process_file(
+    # Process file and extract knowledge graph
+    extract_kg_from_doc(
+        file_path=first_file,
         llm_model=llm_model,
         secondary_llm_model=secondary_llm_model,
-        file_path=first_file,
-        T=max_tokens_per_window,
-        N=num_runs_per_function,
-        O=overlap_tokens,
+        max_tokens_per_window=max_tokens_per_window,
+        num_runs_per_function=num_runs_per_function,
+        overlap_tokens=overlap_tokens
     )
-
-    # Save the knowledge graph if it was created
-    if knowledge_graph:
-        output_dir = "knowledge_graphs"
-        os.makedirs(output_dir, exist_ok=True)
-
-        base_name = os.path.basename(first_file)
-        output_file = os.path.join(output_dir, f"{base_name}.json")
-
-        try:
-            with open(output_file, "w", encoding="utf-8") as f:
-                json.dump(knowledge_graph, f, indent=2)
-            print(f"Saved knowledge graph for {base_name} to {output_file}")
-        except Exception as e:
-            print(f"Error saving knowledge graph for {base_name}: {e}")
 
     print("--- File Iterator Finished ---")

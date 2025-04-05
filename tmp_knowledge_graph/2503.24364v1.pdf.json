@@ -1,0 +1,1094 @@
+{
+  "nodes": {
+    "Common Table Expressions": {
+      "attributes": {
+        "description": "Temporary named result sets that can be referenced within a single SQL statement."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "query": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "This text is about improving the accuracy of text-to-SQL generation using execution-guided self-consistency techniques. It compares different language models and their performance on the BIRD-SQL dataset, focusing on how self-consistency and partial executability can enhance the quality of generated SQL queries. The text also analyzes the types of errors that self-consistency effectively addresses and discusses the limitations and potential future directions of this approach.": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "text-to-PipeSQL": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_extendedprice": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "query structure": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_suppkey": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "large language model deployment infrastructures": {
+      "attributes": {
+        "description": "The systems and resources used to deploy and run large language models."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "database schema": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_orderkey": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "This text is about providing examples and documentation for generating SQL queries using BigQuery's pipe query syntax (PipeSQL), error classification in text-to-SQL models, and the structure of a BigQuery database schema.": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "ps_supplycost": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "gold standard SQL query": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "queries": {
+      "attributes": {
+        "description": "Requests for data from a database."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "semantic equivalence": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Liliane Bettencourt": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Snowflake Cortex": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "s_acctbal": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "empirical distribution": {
+      "attributes": {
+        "description": "A probability distribution based on observed data."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "SQLite": {
+      "attributes": {
+        "description": "A widely used SQL dialect",
+        "type": "SQL dialect"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "o_comment": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "p_container": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "BigQuery format": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_returnflag": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "PERU": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "textual similarities": {
+      "attributes": {
+        "description": "Measures of how alike two pieces of text are."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "fp8": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "n_regionkey": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "SQLGlot": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "r_regionkey": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "bf16 precision": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "error-correction methods": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_discount": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "CPU memory": {
+      "attributes": {
+        "description": "The main memory of a computer's central processing unit."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "zero-one utility": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "code": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "execution results": {
+      "attributes": {
+        "description": "The output or outcome of running a query."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "codes\u2019 behavior": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "complexity": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Transformers library": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "New Entities:": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "IEEE Transactions on Acoustics, Speech, and Signal Processing": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "sampling temperature": {
+      "attributes": {
+        "description": "A parameter that influences the diversity of generated SQLs",
+        "type": "parameter"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "singer": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "TPC Benchmark\u2122 H (Decision Support) Standard Specification Revision": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "o_orderpriority": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "data frames": {
+      "attributes": {
+        "description": "Two-dimensional, labeled data structures with columns of potentially different types."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Together.ai": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "superpower": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "net_worth_millions": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "intermediate query generation stages": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "partial executability": {
+      "attributes": {
+        "description": "A feature of the PipeSQL dialect",
+        "type": "feature"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "SuffixDecoding": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "ps_availqty": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "aggregation": {
+      "attributes": {
+        "type": "error category"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "p_mfgr": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "PipeSQL dialect": {
+      "attributes": {
+        "description": "A novel SQL dialect used for partial executability",
+        "type": "SQL dialect"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "horizontal rows": {
+      "attributes": {
+        "description": "Rows in a table."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Codestral": {
+      "attributes": {
+        "type": "language model"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "hero_attribute": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "projection errors": {
+      "attributes": {
+        "type": "error category"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "reasoning paths": {
+      "attributes": {
+        "description": "Different sequences of steps or logic used by a model to arrive at an answer."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "schema linking": {
+      "attributes": {
+        "type": "error category"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "hair_colour_id": {
+      "attributes": {
+        "type": "integer",
+        "property": "foreign key",
+        "references": "colour",
+        "example values": "( 13, 1, 4 )"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "hero_power": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "vertical columns": {
+      "attributes": {
+        "description": "Columns in a table."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "prompt": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Proceedings of the ACM SIGOPS 29th Symposium on Operating Systems Principles": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "This text is about providing examples and documentation for generating SQL queries using BigQuery's pipe query syntax (PipeSQL). It includes table schemas for a superhero database and several example queries related to business scenarios, demonstrating the use of various pipe operators.": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "cells": {
+      "attributes": {
+        "description": "Individual data points in a table."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "database engine": {
+      "attributes": {
+        "description": "The software component that manages and processes database queries."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "attribute_value": {
+      "attributes": {
+        "type": "integer",
+        "example values": "( 80 , 75 , 95 )"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "None": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "n_nationkey": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "recall": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "logical execution plans": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "skin_colour_id": {
+      "attributes": {
+        "type": "integer",
+        "property": "foreign key",
+        "references": "colour",
+        "example values": "( 1, 7, 23 )"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "pipe sequence": {
+      "attributes": {
+        "description": "A sequence of operations in PipeSQL, separated by the |> symbol."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "power_name": {
+      "attributes": {
+        "type": "text",
+        "example values": "( \u2019Agility\u2019 , \u2019Accelerated Healing\u2019 , \u2019Lantern Power Ring\u2019 )"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Minimum Bayes Risk (MBR) decoding framework": {
+      "attributes": {
+        "description": "A decoding framework that aims to minimize the expected loss or maximize the expected utility."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "eye_colour_id": {
+      "attributes": {
+        "type": "integer",
+        "property": "foreign key",
+        "references": "colour",
+        "example values": "( 9, 33 , 7 )"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "error_category": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "c_acctbal": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Gemma": {
+      "attributes": {
+        "size": "12B, 27B",
+        "type": "language model"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "ps_partkey": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "song": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Llama 3.3": {
+      "attributes": {
+        "size": "70B",
+        "type": "language model"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Python code": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "MCS-SQL": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Qwen 2.5 Coder": {
+      "attributes": {
+        "version": "7B",
+        "description": "A language model, specifically a coder model",
+        "size": "7B, 34B",
+        "type": "language model"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "HumanEval+": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "SQL normalization": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "CoT": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Gemini Flash": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_quantity": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Proceedings of the Human Language Technology Conference of the North American Chapter of the Association for Computational Linguistics": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_receiptdate": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "code utility": {
+      "attributes": {
+        "description": "The usefulness or value of code."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "s_comment": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "tables": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Google interface": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "self-consistency method": {
+      "attributes": {
+        "description": "A strategy to improve accuracy",
+        "type": "method"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "employees table": {
+      "attributes": {
+        "description": "A database table containing information about employees."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "cost-efficiency": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Proceedings of the VLDB Endowment": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "exact match accuracy": {
+      "attributes": {
+        "description": "The percentage of times a model's output exactly matches the correct answer."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Nvidia DGX nodes": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Thirty-seventh Conference on Neural Information Processing Systems": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "execution behavior": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "execution-based similarity metrics": {
+      "attributes": {
+        "description": "Metrics that measure the similarity of queries based on their execution results.",
+        "type": "metrics"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "code generation tasks": {
+      "attributes": {
+        "description": "Tasks involving generating code from a specification or description."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "p_partkey": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "hypothesis": {
+      "attributes": {
+        "description": "A proposed explanation or solution."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "output spaces": {
+      "attributes": {
+        "description": "The range of possible outputs that a model can generate."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_partkey": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "s_address": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "SQL dialects": {
+      "attributes": {
+        "description": "Different versions or implementations of SQL",
+        "type": "category"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "utility function": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "greedy decoding": {
+      "attributes": {
+        "description": "A baseline decoding method",
+        "type": "decoding method"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "iterative refinement": {
+      "attributes": {
+        "description": "A process of repeatedly improving a result through multiple steps."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "PagedAttention": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "c_custkey": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_shipdate": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "c_phone": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "o_orderstatus": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "ps_suppkey": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "p_brand": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "posterior distribution": {
+      "attributes": {
+        "description": "The probability distribution of a parameter after observing evidence."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "numcust": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "department IDs": {
+      "attributes": {
+        "description": "Unique identifiers for departments within an organization."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "majority voting": {
+      "attributes": {
+        "description": "A method used with normalization",
+        "type": "method"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "BigQuery": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_shipinstruct": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "s_suppkey": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "s_name": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "numerical values": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "mathematical problems": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "similarity matrix": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "empirical improvements": {
+      "attributes": {
+        "description": "Improvements observed through experiments and data."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "height_cm": {
+      "attributes": {
+        "type": "integer",
+        "example values": "( 188 , 203 , 191 )"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "logical form": {
+      "attributes": {
+        "type": "error category"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "cntrycode": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "totacctbal": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "EXPLAIN query": {
+      "attributes": {
+        "description": "A query that returns the execution plan for another query."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "query prefix": {
+      "attributes": {
+        "description": "The beginning part of a SQL query."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "BIRD-SQL dataset": {
+      "attributes": {
+        "description": "A dataset for text-to-SQL tasks",
+        "type": "dataset"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "DeepSeek Coder": {
+      "attributes": {
+        "size": "33B",
+        "type": "language model"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "o_orderdate": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Alice Walton": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "gold standard query execution results": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "data type mismatches": {
+      "attributes": {
+        "type": "error category"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_tax": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "OpenAI models": {
+      "attributes": {
+        "description": "Language models developed by OpenAI.",
+        "type": "language model family"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_commitdate": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "dialect mismatches": {
+      "attributes": {
+        "type": "error category"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "p_name": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "execution plan": {
+      "attributes": {
+        "description": "A sequence of operations that a database engine performs to execute a query."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "superhero_name": {
+      "attributes": {
+        "type": "text",
+        "example values": "( \u20193-D Man\u2019 , \u2019A-Bomb\u2019 , \u2019Abe Sapien\u2019 )"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "prefix executability": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "semantic correctness": {
+      "attributes": {
+        "description": "The accuracy of the meaning or intent of a query."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "syntactic forms": {
+      "attributes": {
+        "description": "The structure and grammar of code or language."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "s_nationkey": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "vLLM": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "structural similarities": {
+      "attributes": {
+        "description": "Measures of how alike the structure of two pieces of code or language are."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_shipmode": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "citizenship": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Christy Walton": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "full_name": {
+      "attributes": {
+        "type": "text",
+        "example values": "( \u2019Charles Chandler\u2019 , \u2019Richard Milhouse Jones\u2019 , \u2019Abraham Sapien\u2019 )"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "New entities:": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "patience parameter": {
+      "attributes": {
+        "description": "A parameter used with partial executability",
+        "type": "parameter"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "weight_kg": {
+      "attributes": {
+        "type": "integer",
+        "example values": "( 90 , 441 , 65 )"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "birth_year": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "latency": {
+      "attributes": {
+        "description": "The delay or time it takes for a process to complete."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "Mistral Large": {
+      "attributes": {
+        "type": "language model"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "MBPP+": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "execution similarity": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "join statements": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "text-to-SQL tasks": {
+      "attributes": {
+        "description": "Tasks involving generating SQL queries from natural language text."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "SQL": {
+      "attributes": {
+        "description": "Structured Query Language, a programming language used for managing data in relational database management systems.",
+        "type": "query language"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "l_linestatus": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "heavy reasoners": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "execution equivalence": {
+      "attributes": {
+        "description": "The property of two queries producing the same results when executed."
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "s_phone": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "beam search": {
+      "attributes": {
+        "type": "decoding method"
+      },
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "reasoning": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    },
+    "numwait": {
+      "attributes": {},
+      "source_uri": "2503.24364v1.pdf"
+    }
+  },
+  "edges": [
+    {
+      "source": "self-consistency method",
+      "relation": "employs",
+      "target": "majority voting",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "department IDs",
+      "relation": "from",
+      "target": "employees table",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "output spaces",
+      "relation": "defined by",
+      "target": "execution behavior",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "PipeSQL dialect",
+      "relation": "has",
+      "target": "query prefix",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "execution results",
+      "relation": "used for",
+      "target": "execution-based similarity metrics",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "execution plan",
+      "relation": "returned by",
+      "target": "EXPLAIN query",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "PipeSQL dialect",
+      "relation": "uses",
+      "target": "pipe sequence",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "BIRD-SQL dataset",
+      "relation": "used for",
+      "target": "text-to-SQL tasks",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "self-consistency method",
+      "relation": "enhanced by",
+      "target": "partial executability",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "PipeSQL dialect",
+      "relation": "used for",
+      "target": "partial executability",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "patience parameter",
+      "relation": "used with",
+      "target": "partial executability",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "SQL dialects",
+      "relation": "include",
+      "target": "SQLite",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "SQL dialects",
+      "relation": "include",
+      "target": "PipeSQL dialect",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "self-consistency method",
+      "relation": "compared to",
+      "target": "greedy decoding",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "self-consistency method",
+      "relation": "compared to",
+      "target": "beam search",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "self-consistency method",
+      "relation": "compared to",
+      "target": "majority voting",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "Mistral Large",
+      "relation": "compared to",
+      "target": "greedy decoding",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "Codestral",
+      "relation": "compared to",
+      "target": "greedy decoding",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "HumanEval+",
+      "relation": "used in experiments with",
+      "target": "Python code",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "MBPP+",
+      "relation": "used in experiments with",
+      "target": "Python code",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "DeepSeek Coder",
+      "relation": "evaluated on",
+      "target": "BIRD-SQL dataset",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "Codestral",
+      "relation": "evaluated on",
+      "target": "BIRD-SQL dataset",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "Gemini Flash",
+      "relation": "evaluated on",
+      "target": "BIRD-SQL dataset",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "hero_power",
+      "relation": "references",
+      "target": "superpower",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "s_nationkey",
+      "relation": "equals",
+      "target": "n_nationkey",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "singer",
+      "relation": "has",
+      "target": "birth_year",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "singer",
+      "relation": "has",
+      "target": "citizenship",
+      "source_uri": "2503.24364v1.pdf"
+    },
+    {
+      "source": "singer",
+      "relation": "has",
+      "target": "net_worth_millions",
+      "source_uri": "2503.24364v1.pdf"
+    }
+  ]
+}
