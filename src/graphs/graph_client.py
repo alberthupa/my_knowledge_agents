@@ -4,6 +4,7 @@ import os
 from langchain_community.graphs import Neo4jGraph
 from neo4j import GraphDatabase
 import json
+import uuid
 #import networkx as nx
 #import matplotlib.pyplot as plt
 
@@ -73,7 +74,7 @@ class Neo4jDriver:
         """
         Import nodes and edges from a JSON file into Neo4j.
         All nodes will be created with the label 'Term'.
-        Includes source_uri as a property for both nodes and relationships.
+        Includes source_uri and uuid as properties for both nodes and relationships.
         
         :param json_file_path: Path to the JSON file containing nodes and edges data
         :return: Summary of the import operation
@@ -90,17 +91,18 @@ class Neo4jDriver:
             nodes_count = 0
             if 'nodes' in data:
                 for node_name, node_data in data.get('nodes', {}).items():
-                    # Include source_uri as a property of the node
+                    # Include source_uri and uuid as properties of the node
                     properties = {
                         'name': node_name,
-                        'source_uri': node_data.get('source_uri', '')
+                        'source_uri': node_data.get('source_uri', ''),
+                        'uuid': str(uuid.uuid4())  # Add UUID as a unique identifier
                     }
                     
                     # Add all attributes to properties
                     for attr_key, attr_value in node_data.get('attributes', {}).items():
                         properties[attr_key] = attr_value
                     
-                    # Create node with all properties including source_uri
+                    # Create node with all properties including source_uri and uuid
                     query = (
                         "MERGE (n:Term {name: $name}) "
                         "SET n += $properties"
@@ -118,15 +120,16 @@ class Neo4jDriver:
                     source_uri = edge.get('source_uri', '')
                     
                     if source and target and relation:
-                        # Create relationship with source_uri as property
+                        # Create relationship with source_uri and uuid as properties
                         query = (
                             f"MATCH (source:Term {{name: $source}}), (target:Term {{name: $target}}) "
-                            f"MERGE (source)-[r:`{relation}` {{source_uri: $source_uri}}]->(target)"
+                            f"MERGE (source)-[r:`{relation}` {{source_uri: $source_uri, uuid: $uuid}}]->(target)"
                         )
                         self.run_query(query, parameters={
                             'source': source, 
                             'target': target, 
-                            'source_uri': source_uri
+                            'source_uri': source_uri,
+                            'uuid': str(uuid.uuid4())  # Add UUID for the relationship
                         })
                         edges_count += 1
             
