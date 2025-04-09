@@ -8,11 +8,11 @@ def ingest_kg_from_script():
     """Main entry point for knowledge graph extraction"""
     # Hardcoded settings
     file_path = "sources/2503.24235v1.pdf"  # Path to your document
-    file_path = "sources/2503.24364v1.pdf"  # Path to your document
+    # file_path = "sources/2503.24364v1.pdf"  # Path to your document
     llm_model = "gemini-2.0-flash"  # Primary LLM model
     secondary_llm_model = "gpt-4o"  # Secondary LLM model (can be None)
     max_tokens_per_window = 4000  # Maximum tokens per window (T)
-    num_runs_per_function = 1  # Number of runs per function (N)
+    num_runs_per_function = 2  # Number of runs per function (N)
     overlap_tokens = 50  # Token overlap between windows (O)
     output_dir = "tmp_knowledge_graph"  # Directory to save the knowledge graph
     

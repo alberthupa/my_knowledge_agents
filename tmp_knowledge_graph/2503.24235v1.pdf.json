@@ -1,0 +1,1910 @@
+{
+  "nodes": {
+    "creativity": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Math-shepherd": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "CVBench": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "SimPO": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Deepseekmath": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Pretraining era": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Science OlympicArena": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "open challenges": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "assessment aspects": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "C-SimpleQA": {
+      "attributes": {
+        "type": "benchmark",
+        "descriptor": "emphasizes factual correctness and retrieval-based reasoning"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Logic-RL": {
+      "attributes": {
+        "description": "Unleashing LLM reasoning with rule-based reinforcement learning"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Bradley-Terry model": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Parallel scaling": {
+      "attributes": {
+        "Definition": "Improves solution reliability by generating multiple responses and selecting the best answer",
+        "Challenge": "Diminishing returns when coverage reaches saturation",
+        "Possible Advancements": [
+          "Smart Coverage Expansion",
+          "Verifier-Augmented Parallel Scaling"
+        ]
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Output verification": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Long Chain-of-Thought": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Generative Verifier": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Sessa et al. (2024)": {
+      "attributes": {
+        "description": "Tunes the best-of-N results into the LM via RLHF to reduce sample inefficiency",
+        "action": "tunes Best-of-N results into the LM via RLHF"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Token Cost": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Crowd comparative reasoning": {
+      "attributes": {
+        "description": "Unlocking comprehensive evaluations for LLM-as-a-Judge",
+        "authors": [
+          "Qiyuan Zhang",
+          "Yufei Wang",
+          "Yuxin Jiang",
+          "Liangyou Li",
+          "Chuhan Wu",
+          "Yasheng Wang",
+          "Xin Jiang",
+          "Lifeng Shang",
+          "Ruiming Tang",
+          "Fuyuan Lyu",
+          "Chen Ma"
+        ],
+        "publication": "arXiv"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Scaling formulations": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Codehalu": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "JMLE-2024": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Plangen": {
+      "attributes": {
+        "definition": "A multi-agent framework for generating planning and reasoning trajectories for complex problem solving"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "knowledge-intensive tasks": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "JEEBench": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Forest-of-Thought": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "SciBench": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "NuminaMath": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "RR-MP": {
+      "attributes": {
+        "reference": "He et al., 2025"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "China\u2019s national college entrance examination": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Multi-Agent Verifiers": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Reinforcement learning": {
+      "attributes": {
+        "description": "Can play a pivotal role in unlocking effective TTS for language models.",
+        "application": "Training the model to make better use of the extra inference steps available, learning dynamic inference policies."
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Li et al. (2025c)": {
+      "attributes": {
+        "description": "Also adopts LLM as the synthesizer, given the intermediate consideration in previous steps",
+        "action": "adopts LLM as the synthesizer given the intermediate consideration in previous steps"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "MM-Vet": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "CMMLU": {
+      "attributes": {
+        "description": "Measuring massive multitask language understanding in Chinese"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "System 2 AI": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "clinical reasoning": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "knowledge synthesis": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Discriminator": {
+      "attributes": {
+        "description": "Used in LLM planning"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "programming & code generation": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "CPL": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "New Entities:": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "OlympiadBench": {
+      "attributes": {
+        "type": "benchmark",
+        "descriptor": "spans advanced competition-level math problems"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Self-repetition": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "coding tasks": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "prompt strategy": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Distillation": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Underthinking score": {
+      "attributes": {
+        "definition": "Quantifies the inefficiency of a model when it initially generates a correct thought but fails to follow through to a correct final answer",
+        "formula": "\u03beUT = 1/N * \u03a3(1 - \u02c6Ti/Ti)"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "distillation": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Bandit algorithm": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Self-Reflection Feedback": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "V-STaR": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "MCTS-Judge": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "MedQA": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Latency": {
+      "attributes": {
+        "definition": "Latency is the time taken for a system to respond to a given input.",
+        "category": "Inference efficiency metric"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "general tasks": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "cDPO": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Filler-token": {
+      "attributes": {
+        "reference": "Pfau et al., 2024"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "process state": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Light-R1": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "inference": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Mean Deviation from Target Length": {
+      "attributes": {
+        "definition": "Quantifies the average relative difference between the generated output length and the target length",
+        "formula": "Ex\u223cD[|ngenerated \u2212 ngold|/ngold]"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "reasoning models": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "verification": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "STaR": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "TinyZero": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Fact-Checking via Retrieval": {
+      "attributes": {
+        "description": "Unified evaluation of retrieval-augmented generation"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Scaling laws": {
+      "attributes": {
+        "Observation": "Increasing inference-time compute yields consistent performance improvements.",
+        "description": "For neural language models",
+        "authors": "Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B. Brown, Benjamin Chess, Rewon Child, Scott Gray, Alec Radford, Jeffrey Wu, Dario Amodei",
+        "year": "2020",
+        "field": "neural language models"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "SWE-bench Lite": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Adaptive Injection": {
+      "attributes": {
+        "reference": "Jin et al., 2025",
+        "description": "Decoding method for enhancing LLM reasoning",
+        "enhances": "LLM reasoning",
+        "type": "decoding technique"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Bandit": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "ReMax": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "open-ended tasks": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "MathVista": {
+      "attributes": {
+        "type": "benchmark",
+        "descriptor": "testing multimodal reasoning across visual and textual modalities"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "outcome": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "performance dimensions": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Miverva": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "general-purpose tasks": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Supervised finetuning": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "ReST-MCTS": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Tool": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "task domains": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "LCPO": {
+      "attributes": {
+        "description": "Focuses on optimizing accuracy and adherence to user-specified length constraints for reasoning tasks",
+        "reference": "Aggarwal and Welleck, 2025a",
+        "authors": "Aggarwal and Welleck",
+        "year": "2025a",
+        "properties": "optimizes accuracy and adherence to user-specified length constraints for reasoning tasks"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Gaokao": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Chatbot Arena": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "inference time": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Cons@k": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "GPQA": {
+      "attributes": {
+        "definition": "A graduate-level google-proof q&a benchmark"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "LongBench": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "X-R1": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "RouteLLM": {
+      "attributes": {
+        "focus": "Learning to route LLMs from preference data"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Munkhbat et al. (2025)": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Pre-train scaling": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "CodeContests": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "iterative verification": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "mathematics": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "internal scaling": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "k-\u03f5Controllability": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "developmental trajectories": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "AReaL": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "SciEval": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Functional": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "DeCRIM": {
+      "attributes": {
+        "reference": "Ferraz et al., 2024"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Mixture-of-model": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "TheoremQA": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "SPPD": {
+      "attributes": {
+        "description": "Utilizes process preference learning with a dynamic value margin for self-training",
+        "reference": "Yi et al., 2025",
+        "authors": "Yi et al.",
+        "year": "2025",
+        "properties": "utilizes process preference learning with a dynamic value margin for self-training"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "This text is a survey paper about test-time scaling (TTS) in large language models (LLMs). It proposes a unified framework to analyze TTS methods based on four core dimensions: what to scale, how to scale, where to scale, and how well to scale. The paper reviews existing methods, application scenarios, and assessment aspects, and identifies open challenges and future research directions in TTS.": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Control Metric": {
+      "attributes": {
+        "definition": "Quantifies adherence to compute budget ranges.",
+        "formula": "Control = 1/|A| * \u03a3 I(amin \u2264 a \u2264 amax)",
+        "proponents": [
+          "Muennighoff et al. (2025)"
+        ]
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Coat": {
+      "attributes": {
+        "definition": "Chain-of-associated-thoughts framework for enhancing large language models reasoning"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Elo Rating": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Sudoku puzzles": {
+      "attributes": {
+        "description": "Solved through sequential search"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "FLOPs-based Efficiency Analysis": {
+      "attributes": {
+        "definition": "FLOPs-based compute analysis quantifies computational cost.",
+        "method": "plotting accuracy versus total inference FLOPs",
+        "category": "Evaluation method"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Ma-lot": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "ensemble fusion": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "MMBench": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "WebV oyager": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "GPQA Diamond": {
+      "attributes": {
+        "type": "benchmark",
+        "descriptor": "focusing on advanced scientific reasoning and integrated domain knowledge"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "LLM-based Evaluator": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "pairwise comparison metrics": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "artificial general intelligence": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Selection methods": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Coulom, 2006": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "mixture-of-model": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "multimodal tasks": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "AGIEval": {
+      "attributes": {
+        "description": "A human-centric benchmark for evaluating foundation models",
+        "authors": [
+          "Wanjun Zhong",
+          "Ruixiang Cui",
+          "Yiduo Guo",
+          "Yaobo Liang",
+          "Shuai Lu",
+          "Yanlin Wang",
+          "Amin Saied",
+          "Weizhu Chen",
+          "Nan Duan"
+        ],
+        "conference": "Findings of North American Chapter of the Association for Computational Linguistics"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "FrontierMath": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Algorithmic mechanisms": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "REINFORCE": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Graph-of-Thoughts": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "USACO": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Test-time scaling (TTS)": {
+      "attributes": {
+        "Definition": "A family of methods that progressively elicits the model\u2019s intelligence in the test-time by allocating additional computation during inference to boost task performance.",
+        "Core Dimensions": "What to scale, how to scale, where to scale, and how well to scale",
+        "Goal": "To fully elicit the intelligence encoded in LLMs at inference time to maximize their real-world effectiveness",
+        "Related to": "Large language models (LLMs)",
+        "Benefits": "Enabling significant breakthroughs not only in specialized reasoning tasks, such as mathematics and coding, but also in general tasks like open-ended Q&A.",
+        "description": "Can substantially enhance LLMs\u2019 performance across diverse real-world scenarios",
+        "is a promising methodology": "for reasoning-intensive tasks",
+        "impacts": "models like OpenAI\u2019s o1 and DeepSeek-R1",
+        "challenges": [
+          "parallel scaling",
+          "sequential scaling",
+          "internal scaling",
+          "hybrid scaling"
+        ]
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "algorithmic mechanisms": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "DeepScaler": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Long Chain-of-Thought (CoT)": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "agentic approach": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "cross-modal integration": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Puri et al. (2025)": {
+      "attributes": {
+        "description": "Proposes filtering upon the samples, motivated by particle filtering",
+        "proposal": "consider filtering upon the samples"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "OREO": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Majority voting": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Rule-Based Filters": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Deductive PRM": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "routing problem": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "LLM-as-a-Judge": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "breath-first search": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "MMStar": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "This text is a list of references for a research paper, likely related to large language models (LLMs), reasoning, and test-time scaling. The references cover various techniques, evaluations, and benchmarks in the field.": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "SimpleRL": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "fusion": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "SysBench": {
+      "attributes": {
+        "type": "benchmark",
+        "descriptor": "evaluates models\u2019 strategic reasoning in interactive tasks"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "human cognition": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "SimpleRL-Zoo": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Medbullets": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "WinRate": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "debugging": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "factual verification": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "hybrid scaling": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Inference-time compute": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "RFTT": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "DVPO": {
+      "attributes": {
+        "description": "Streamlined framework substituting the reward model with a pre-trained global value model and removing the dependency between the actor and critic",
+        "reference": "Huang et al., 2025a",
+        "authors": "Huang et al.",
+        "year": "2025a",
+        "properties": "streamlined framework, substitutes reward model with a pre-trained global value model, removes dependency between actor and critic"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "logical inference": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Core dimensions of TTS research": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "PoT": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "International Conference on Learning Representations": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "MMMU": {
+      "attributes": {
+        "type": "benchmark",
+        "descriptor": "testing multimodal reasoning across visual and textual modalities"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "decode strategy": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Upper Confidence Bound for Trees": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "LLA V A-Wild": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "ARC-AGI": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "application scenarios": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "ArenaHard": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "CHAIR": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "TextCraft": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Besta et al. (2024)": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "external verifiers": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Edward Beeching (2024)": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "QWQ": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "majority voting": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "IF-Eval": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Naive PRM": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Internal scaling": {
+      "attributes": {
+        "description": "Area where reinforcement learning advancements are driving progress",
+        "Definition": "Allows on-the-fly computation modulation without external intervention",
+        "Challenges": [
+          "Effective Compute Allocation",
+          "Stability and Consistency",
+          "Interpretability and Controllability"
+        ],
+        "Potential": "Maximize efficiency, enhance model adaptability, and push AI systems toward more autonomous, self-regulating reasoning",
+        "category": "Reinforcement Learning",
+        "requires": "non-neglectable resources for tuning",
+        "properties": [
+          "effective compute allocation",
+          "stability and consistency",
+          "interpretability",
+          "controllability"
+        ]
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Task performance": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Self-Evaluation": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "DAPO": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "multi-step reasoning": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "This text is about test-time scaling (TTS) in large language models (LLMs). It discusses aggregation techniques, categorizes application scenarios into domains like reasoning-intensive, general-purpose, and multimodal tasks, and classifies evaluation metrics into performance, controllability, scalability, and efficiency. Key concepts include methods for scaling, benchmarks for evaluation, and metrics for assessing performance and efficiency.": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "output verification": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "RMSE of Length Deviation": {
+      "attributes": {
+        "definition": "Captures the variance in length control",
+        "formula": "sqrt(1/N * \u03a3[(ngenerated,i \u2212 ngold,i)/ngold,i]^2)"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "k\u2013\u03f5 controllability": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "MR-Ben": {
+      "attributes": {
+        "type": "benchmark",
+        "descriptor": "focusing on advanced scientific reasoning and integrated domain knowledge"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "aggregation": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Heuristic": {
+      "attributes": {
+        "description": "A problem-solving approach"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Treebon": {
+      "attributes": {
+        "techniques": "Enhancing inference-time alignment with speculative tree-search and best-of-n sampling"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Sequential scaling": {
+      "attributes": {
+        "Definition": "Faces unique challenges, particularly in maintaining coherence and preventing error accumulation",
+        "Key Issue": "Optimizing stepwise reasoning to avoid diminishing returns or reinforcing incorrect steps",
+        "Possible Directions": [
+          "Structured Self-Refinement",
+          "Verification-Enhanced Iterative Scaling"
+        ],
+        "Potential": "Evolve beyond simple iterative refinement, becoming a highly adaptive, self-correcting reasoning paradigm that enables models to engage in goal-directed, long-horizon thinking"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Points24": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "OmniMath": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "medical reasoning": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "None": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "multidimensional framework": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "KV Cachesize": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "North American Chapter of the Association for Computational Linguistics": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "State Verifier": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Focused-DPO": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "GSM8K": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "OpenRLHF": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "reinforcement learning": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "GPQA: A graduate-level google-proof q&a benchmark": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Wrong-of-thought": {
+      "attributes": {
+        "description": "An integrated reasoning framework with multi-perspective verification and addressing wrong information",
+        "authors": [
+          "Yongheng Zhang",
+          "Qiguang Chen",
+          "Jingxuan Zhou",
+          "Peng Wang",
+          "Jiasheng Si",
+          "Jin Wang",
+          "Wenpeng Lu",
+          "Libo Qin"
+        ],
+        "conference": "Findings of the Association for Computational Linguistics: EMNLP 2024"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Selective DPO": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "FollowBench": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Length Deviation": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Marco-o1": {
+      "attributes": {
+        "description": "Towards open reasoning models for open-ended solutions",
+        "authors": [
+          "Yu Zhao",
+          "Huifeng Yin",
+          "Bo Zeng",
+          "Hao Wang",
+          "Tianqi Shi",
+          "Chenyang Lyu",
+          "Longyue Wang",
+          "Weihua Luo",
+          "Kaifu Zhang"
+        ],
+        "publication": "arXiv"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "pretraining": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Naive ORM": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "AFT": {
+      "attributes": {
+        "reference": "Li et al., 2025g"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "PRIME": {
+      "attributes": {
+        "description": "Integrates the SFT model as a PRM within a unified RL framework, allowing online updates through policy rollouts and outcome labels via implicit process rewards",
+        "reference": "Cui et al., 2025",
+        "authors": "Cui et al.",
+        "year": "2025",
+        "properties": "integrates the SFT model as a PRM within a unified RL framework, allows online updates through policy rollouts and outcome labels via implicit process rewards"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Codeforces": {
+      "attributes": {
+        "type": "dataset",
+        "descriptor": "provides expert-level coding challenges"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "VinePPO": {
+      "attributes": {
+        "description": "Unlocking RL potential for LLM reasoning through refined credit assignment",
+        "reference": "Kazemnejad et al., 2024",
+        "authors": "Amirhossein Kazemnejad, Milad Aghajohari, Eva Portelance, Alessandro Sordoni, Siva Reddy, Aaron Courville, Nicolas Le Roux",
+        "year": "2024",
+        "properties": "exploits flexibility of language environments to compute unbiased Monte Carlo-based estimates, avoids need for large value networks",
+        "purpose": "unlock RL potential for LLM reasoning",
+        "type": "refined credit assignment"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "BCFL": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "taxonomy": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Pass@1": {
+      "attributes": {
+        "description": "One of the most widely used metrics for evaluating the correctness of a model\u2019s first output attempt. It measures the proportion of problems where the model\u2019s first generated solution is correct."
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Kaoyan": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "BRAIN": {
+      "attributes": {
+        "reference": "Chen et al., 2024f",
+        "approach": "Brain-inspired two-stage for mathematical reasoning",
+        "inspiration": "Imitate human thought processes"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "multi-domain knowledge integration": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Codeforces Percentile": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Self-consistency principle": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "AlpacaEval2.0": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "MoA": {
+      "attributes": {
+        "reference": "Wang et al., 2025a"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Humanity\u2019s last exam": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "self-repetition": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "diagnostic decision-making": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "WebShop": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "TAU-bench": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "RLOO": {
+      "attributes": {
+        "description": "A method",
+        "reference": "Ahmadian et al., 2024b",
+        "authors": "Ahmadian et al.",
+        "year": "2024b",
+        "methods": "reduces GPU memory usage, speeds up training process"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "reasoning": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "WebArena": {
+      "attributes": {
+        "description": "A realistic web environment for building autonomous agents"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "reasoning-intensive tasks": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Self-Refine": {
+      "attributes": {
+        "reference": "Madaan et al., 2023",
+        "description": "An advanced TTS technique that enables an LLM to iteratively improve its own outputs through self-generated feedback.",
+        "authors": "Madaan et al. (2023)",
+        "type": "TTS technique",
+        "characteristics": "Requires no additional training data or fine-tuning, leverages test-time compute, improves model reliability by progressively improving responses without requiring additional training.",
+        "technique": "TTS",
+        "developers": "Madaan et al., 2023",
+        "properties": [
+          "iteratively improves outputs through self-feedback",
+          "requires no additional training data or fine-tuning",
+          "leverages test-time compute",
+          "yields better results by identifying and fixing errors"
+        ],
+        "process": [
+          {
+            "step": "Initial Output Generation",
+            "operation": "model produces initial response"
+          },
+          {
+            "step": "Feedback Generation",
+            "operation": "model evaluates response and generates feedback"
+          },
+          {
+            "step": "Refinement Step",
+            "operation": "model updates output using feedback"
+          }
+        ]
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Decode strategy": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Song et al. (2024)": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "search": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "game playing": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Hybrid scaling": {
+      "attributes": {
+        "Definition": "Blends parallel and sequential methods, making it more adaptive and practical for real-world applications",
+        "Limitations": "Current test-time scaling methods are often highly specialized, limiting their generalizability",
+        "Possible Improvements": [
+          "Generalized Hybrid Scaling Architectures",
+          "Multi-Agent & Interactive Scaling"
+        ]
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Unit Test": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "JAMA Clinical Challenge": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "particle filtering": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "RLHF": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "HLE": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "adaptive planning": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Large language models (LLMs)": {
+      "attributes": {
+        "Definition": "Models that learn general intelligence by training-time scaling, where the models ingest more data and parameters.",
+        "Significance": "A transformative milestone toward artificial general intelligence (AGI)",
+        "description": "Language models"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "scientific reasoning": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "deployment": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "strategic reasoning": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Performance dimensions": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Tree-of-Thoughts (ToT)": {
+      "attributes": {
+        "description": "Generalizes CoT to a branching search, allows the model to generate multiple candidate thoughts instead of one, forming a tree of possibilities.",
+        "authors": "Yao et al., 2023b",
+        "type": "reasoning method",
+        "characteristics": "Improves LLM reasoning by introducing iterative, structured inference without additional training, can be modeled as a search process through a state space of partial solutions."
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Best-of-N": {
+      "attributes": {
+        "description": "Selects the highest scored sample (Song et al., 2024)",
+        "enhanced by": "self-certainty",
+        "year": "2025",
+        "authors": "Zhewei Kang, Xuandong Zhao, Dawn Song"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Algorithm-of-Thought": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "interactive decision-making": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "CodeMind": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "code": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "VC-PPO": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "scaling laws": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "parallel scaling": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Clustered Multi-Step TreeSearch (C-MSTS)": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "tuning": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "MATH-Vision": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Scaling curves": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "stimulation": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "XoT": {
+      "attributes": {
+        "description": "Categorization of ToT and similar strategies (e.g., graph-of-thought)",
+        "characteristics": "Significantly improve LLM reasoning by introducing iterative, structured inference without additional training."
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "O1 replication journey": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "O1-coder": {
+      "attributes": {
+        "description": "An O1 replication for coding",
+        "authors": [
+          "Yuxiang Zhang",
+          "Shangxi Wu",
+          "Yuqi Yang",
+          "Jiangming Shu",
+          "Jinlin Xiao",
+          "Chao Kong",
+          "Jitao Sang"
+        ],
+        "publication": "arXiv"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "task performance": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "WoT": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "real-world effectiveness": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Aider-Polyglot": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Reviseval": {
+      "attributes": {
+        "description": "Improving LLM-as-a-Judge via response-adapted references",
+        "authors": [
+          "Qiyuan Zhang",
+          "Yufei Wang",
+          "Tiezheng Yu",
+          "Yuxin Jiang",
+          "Chuhan Wu",
+          "Liangyou Li",
+          "Yasheng Wang",
+          "Xin Jiang",
+          "Lifeng Shang",
+          "Ruiming Tang",
+          "Fuyuan Lyu",
+          "Chen Ma"
+        ],
+        "conference": "International Conference on Learning Representations"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Prompt strategy": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "MMLU-Pro": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Open-Reasoner-Zero": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "sequential scaling": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "LTV": {
+      "attributes": {
+        "reference": "Kong et al., 2025"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "SimpleQA": {
+      "attributes": {
+        "type": "benchmark",
+        "descriptor": "emphasizes factual correctness and retrieval-based reasoning"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Execution-Based Verification": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Monte Carlo Tree Search (MCTS)": {
+      "attributes": {
+        "description": "A search algorithm"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "open-ended Q&A": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "decomposition": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "OVM": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "arXiv preprint": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "mathematical reasoning": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "FRAMES": {
+      "attributes": {
+        "type": "benchmark",
+        "descriptor": "emphasizes factual correctness and retrieval-based reasoning"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "rStar-Math": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "SWE-bench": {
+      "attributes": {
+        "type": "dataset",
+        "descriptor": "provides expert-level coding challenges"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Pass@k": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "HumanEval-Mul": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "C-Eval": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Arena-based Evaluation": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "input modification": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Throughput": {
+      "attributes": {
+        "definition": "Throughput refers to the number of tasks or transactions that a system can handle within a defined timeframe.",
+        "category": "Inference efficiency metric"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "TreeSearch": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "OpenR1": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "SciWorld": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "depth-first search": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Process Reward Model": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "REINFORCE++": {
+      "attributes": {
+        "description": "Simplifies GRPO and enhances its training",
+        "reference": "Hu, 2025",
+        "authors": "Hu",
+        "year": "2025",
+        "properties": "simplifies GRPO, enhances training"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "test-time scaling": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "selection": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "TravelPlan": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "s1": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Scaling metric": {
+      "attributes": {
+        "definition": "Captures the average slope of performance gains as compute increases.",
+        "proponents": [
+          "Muennighoff et al. (2025)"
+        ]
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "reasoning tasks": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "supervised finetuning": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Rest-MCTS*": {
+      "attributes": {
+        "description": "Uses tree-search-based RL to bypass per-step manual annotation typically required for training process rewards",
+        "reference": "Zhang et al., 2024a",
+        "authors": "Zhang et al.",
+        "year": "2024a",
+        "properties": "uses tree-search-based RL to bypass per-step manual annotation required for training process rewards"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Mamm-refine": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "CodeAlphaCode": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Irvine et al., 2023": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "OpenR": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Sky-t1": {
+      "attributes": {
+        "capability": "Train your own o1 preview model within $450"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Deductive verification": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "generative self-aggregation": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "GRPO": {
+      "attributes": {
+        "description": "Replaces traditional value models with improved sampling strategies",
+        "reference": "Shao et al., 2024",
+        "properties": "replaces traditional value models with improved sampling strategies, accelerates learning, achieves performance comparable to GPT-4 in mathematics",
+        "authors": "Shao et al.",
+        "year": "2024"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Pan et al. (2025a)": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Meta-reasoner": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "GraphSearch": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Scaling Curves (Accuracy vs. Compute)": {
+      "attributes": {
+        "definition": "Visualize how metrics such as accuracy, pass rate, or EM improve as token budgets, iteration depth, or the number of samples increase"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Predictive-Decoding": {
+      "attributes": {
+        "reference": "Ma et al., 2025a"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "pipeline": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Budget-forcing": {
+      "attributes": {
+        "reference": "Muennighoff et al., 2025"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "DeepSeek R1": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Inference time": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "problem-solving capabilities": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Supervised fine-tuning (SFT)": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Self-Consistency": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "DQO": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "FLOPs": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "UGDA": {
+      "attributes": {
+        "description": "Leverages the uncertainty and influence of samples during PPO training and iteratively refines the reward model",
+        "reference": "Sun et al., 2025",
+        "authors": "Sun et al.",
+        "year": "2025",
+        "properties": "leverages uncertainty and influence of samples during PPO training, iteratively refines the reward model"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Fusion methods": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "math": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "This text is about various benchmarks and techniques used in the field of large language models (LLMs), particularly focusing on test-time scaling. It covers different categories of benchmarks like code, science, games, medicine, general-purpose, agents, knowledge, open-ended tasks, and multi-modal tasks. It also discusses methods for how to scale, including tuning-based approaches like supervised finetuning (SFT) and reinforcement learning (RL), and inference-based approaches. The text also mentions parallel, sequential and hybrid scaling.": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Scaling Metric": {
+      "attributes": {
+        "definition": "Captures the average slope of performance gains as compute increases",
+        "formula": "1/|A|^2 * \u03a3[f(b) \u2212 f(a)]/[b \u2212 a]"
+      },
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "Token cost": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    },
+    "coding": {
+      "attributes": {},
+      "source_uri": "2503.24235v1.pdf"
+    }
+  },
+  "edges": [
+    {
+      "source": "Test-time scaling (TTS)",
+      "relation": "is related to",
+      "target": "Large language models (LLMs)",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Scaling laws",
+      "relation": "are observed in",
+      "target": "Test-time scaling (TTS)",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "REINFORCE++",
+      "relation": "simplifies",
+      "target": "GRPO",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Reinforcement learning",
+      "relation": "is used for",
+      "target": "internal scaling",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Sessa et al. (2024)",
+      "relation": "tunes",
+      "target": "Best-of-N",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Sessa et al. (2024)",
+      "relation": "uses",
+      "target": "RLHF",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Li et al. (2025c)",
+      "relation": "adopts",
+      "target": "Large language models (LLMs)",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Test-time scaling (TTS)",
+      "relation": "enhances",
+      "target": "Large language models (LLMs)",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Internal scaling",
+      "relation": "requires",
+      "target": "tuning",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Hybrid scaling",
+      "relation": "blends",
+      "target": "parallel scaling",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Hybrid scaling",
+      "relation": "blends",
+      "target": "sequential scaling",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Adaptive Injection",
+      "relation": "enhances",
+      "target": "Large language models (LLMs)",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "VinePPO",
+      "relation": "unlocks potential for",
+      "target": "Large language models (LLMs)",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "VinePPO",
+      "relation": "uses",
+      "target": "Reinforcement learning",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Reviseval",
+      "relation": "improves",
+      "target": "LLM-as-a-Judge",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Hybrid scaling",
+      "relation": "includes",
+      "target": "Parallel scaling",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Hybrid scaling",
+      "relation": "includes",
+      "target": "Sequential scaling",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Self-Refine",
+      "relation": "enables",
+      "target": "Large language models (LLMs)",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Tree-of-Thoughts (ToT)",
+      "relation": "is categorized as",
+      "target": "XoT",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Reinforcement learning",
+      "relation": "unlocks",
+      "target": "Test-time scaling (TTS)",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Sessa et al. (2024)",
+      "relation": "uses",
+      "target": "Best-of-N",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Test-time scaling (TTS)",
+      "relation": "includes challenges of",
+      "target": "parallel scaling",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Test-time scaling (TTS)",
+      "relation": "includes challenges of",
+      "target": "sequential scaling",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Test-time scaling (TTS)",
+      "relation": "includes challenges of",
+      "target": "internal scaling",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Test-time scaling (TTS)",
+      "relation": "includes challenges of",
+      "target": "hybrid scaling",
+      "source_uri": "2503.24235v1.pdf"
+    },
+    {
+      "source": "Crowd comparative reasoning",
+      "relation": "relates to",
+      "target": "LLM-as-a-Judge",
+      "source_uri": "2503.24235v1.pdf"
+    }
+  ]
+}

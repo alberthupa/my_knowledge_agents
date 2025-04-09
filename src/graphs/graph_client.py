@@ -8,8 +8,11 @@ import uuid
 #import networkx as nx
 #import matplotlib.pyplot as plt
 
-load_dotenv()
+from src.vectors.vector_client import VectorStore
 
+
+load_dotenv()
+db_path = "vector_database"
 
 class Neo4jDriver:
     def __init__(self):
@@ -61,14 +64,38 @@ class Neo4jDriver:
             rel_count = session.run("MATCH ()-[r]->() RETURN count(r) AS count").single()["count"]
             nodes = session.run("MATCH (n) RETURN n LIMIT 3").values()
             rels = session.run("MATCH (a)-[r]->(b) RETURN a, r, b LIMIT 3").values()
+            
+            # Get counts by source_uri for nodes
+            nodes_by_source = session.run(
+                "MATCH (n) WHERE n.source_uri IS NOT NULL "
+                "RETURN n.source_uri AS source, count(n) AS count "
+                "ORDER BY count DESC"
+            ).data()
+            
+            # Get counts by source_uri for relationships
+            rels_by_source = session.run(
+                "MATCH ()-[r]->() WHERE r.source_uri IS NOT NULL "
+                "RETURN r.source_uri AS source, count(r) AS count "
+                "ORDER BY count DESC"
+            ).data()
 
         print(f"Nodes: {node_count}, Relationships: {rel_count}")
         print("First 3 nodes:")
         for node in nodes:
-            print(node[0])
+            node_str = str(node[0])
+            print(f"{node_str[:50]}..." if len(node_str) > 50 else node_str)
         print("First 3 relationships:")
         for rel in rels:
-            print(rel)
+            rel_str = str(rel)
+            print(f"{rel_str[:50]}..." if len(rel_str) > 50 else rel_str)
+            
+        print("\nNodes by source_uri:")
+        for item in nodes_by_source:
+            print(f"  {item['source']}: {item['count']}")
+        
+        print("Relationships by source_uri:")
+        for item in rels_by_source:
+            print(f"  {item['source']}: {item['count']}")
 
     def import_from_json(self, json_file_path):
         """
@@ -152,6 +179,8 @@ if __name__ == "__main__":
 
 
         #driver.clear_database()
+        vector_store = VectorStore(db_path)
+        vector_store.drop_vector_store()
         schema = driver.get_graph_schema()
         if schema:
             print("Graph schema retrieved successfully.")
@@ -160,4 +189,7 @@ if __name__ == "__main__":
             print("Failed to retrieve graph schema.")
 
         driver.describe()
-        #driver.import_from_json("/home/albert/python_projects/my_knowledge_agents/tmp_knowledge_graph/2503.24364v1.pdf.json")
+
+        # driver.import_from_json("/home/albert/python_projects/my_knowledge_agents/tmp_knowledge_graph/2503.24364v1.pdf.json")
+        #embedder = GraphEmbedder()
+        #embedder.embed_graph()
