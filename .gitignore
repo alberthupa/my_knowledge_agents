@@ -2,3 +2,4 @@ venv/
 graph_database/
 sources/
 .env
+__pycache__/
