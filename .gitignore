@@ -3,3 +3,5 @@ graph_database/
 sources/
 .env
 __pycache__/
+key_for_git
+key_for_git.pub
