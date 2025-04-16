@@ -1,0 +1,458 @@
+{
+  "nodes": {
+    "error-related documents": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Kunstmuseum Bern": {
+      "attributes": {
+        "type": "museum"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "relation directed acyclic graph": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "vulnerabilities": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Deutsches Hygiene-Museum, Dresden": {
+      "attributes": {
+        "type": "museum"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Polls/All-American Lists": {
+      "attributes": {
+        "type": "topic"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "*   **Source error:** The origin of errors in LLMs.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "African Photography Encounters": {
+      "attributes": {
+        "type": "event"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "None": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "hierarchical capability trees": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "* API calls": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Whitney Biennial": {
+      "attributes": {
+        "type": "art exhibition"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "closed-weight models": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "factual information": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "semantic similarity": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "knowledge base": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "factual knowledge modeling": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "* non-reasoning models": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "fine-tuning": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "model behavior understanding": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Swimming/Paralympic/Olympic Sports": {
+      "attributes": {
+        "type": "topic",
+        "category": "sports"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "hierarchical retrieval": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "* vector quantization": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "gradient-guided prompt generation": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "hallucinations": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "optimization": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "* human pass rate": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "document level": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "multi-agent systems": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "data leakage": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "*   **Deficiencies:** Weaknesses or limitations in LLMs.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Coaching/Teams/Seasons": {
+      "attributes": {
+        "type": "topic"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "error-based subset updates": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "*   **Model comparison:** It compares the performance of different LLMs (gpt-4o, gpt-4o-mini, o1-mini, Qwen2.5-72B-Instruct, DeepSeek-R1-Distill-Llama-70B, and DeepSeek-V3) under various conditions.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "question generator": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Sentence Transformers": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "* internal activations": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "* ground truth answer": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "knowledge errors": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "* error tasks": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "*   **Pre-trained parametric knowledge:** The knowledge encoded in the parameters of a pre-trained LLM.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "error-related retrieval": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "knowledge deficiencies": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Music": {
+      "attributes": {
+        "type": "topic"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Baseball": {
+      "attributes": {
+        "type": "topic",
+        "category": "sports"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "latent factual encoding": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "* error rate": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "New entities:": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Soccer/Association Football": {
+      "attributes": {
+        "type": "topic",
+        "category": "sports"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "*   **Experimental analysis:** It presents analyses of LLM behavior, including their tendency to produce misinformation when lacking knowledge, memory-context conflicts, and the impact of category constraints on error discovery.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "*   **Hallucinations:** The phenomenon of LLMs generating incorrect or nonsensical information.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Russian Localities/Districts": {
+      "attributes": {
+        "type": "topic"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "cumulative error": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "stochastic error ascent": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "*   **Citations and references:** It lists numerous authors and their publications related to large language models, evaluation methods, hallucinations, and benchmarking.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Automated Capability Discovery": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "error discovery": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "failure modes": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "*   **Memory-context conflict:** The conflict between pre-trained knowledge and retrieved information in LLMs.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "College Football": {
+      "attributes": {
+        "type": "topic",
+        "category": "sports"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "*   **Error distribution:** The pattern of errors made by different LLMs.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "dynamic benchmarking": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "American Football": {
+      "attributes": {
+        "type": "topic",
+        "category": "sports"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "source errors": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Simple Time/Date/Day Mentions": {
+      "attributes": {
+        "type": "topic"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "errors": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "multiple-choice question-answer pairs": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "stochastic optimization process": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "This text is a list of authors and citations related to the field of large language models, their evaluation, and related topics like hallucinations and benchmarking.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "*   **Retrieved factual context:** Information retrieved from external sources to supplement an LLM's knowledge.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "*   **QA set:** A collection of question-answer pairs used for evaluation.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "* inverted file system": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "* markdown": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "action-oriented gerund phrase": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "knowledge-intensive benchmarks": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "*   **Misinformation:** The generation of false or inaccurate information by LLMs.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "foundation model": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "AutoBencher": {
+      "attributes": {
+        "Type": "Baseline method for error discovery.",
+        "Performance": "SEA uncovers 26.7% more errors than AutoBencher and reduces cost per error by 9x.",
+        "description": "A baseline method for discovering errors in LLMs.",
+        "comparison": "SEA surpasses AutoBencher by uncovering 26.7% more errors."
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "This text is about:": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "*   **Topic constraint:** Restrictions on the topics used in experiments.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "error propagation": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "English-based knowledge base": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "The most important entities (key concepts) in this window are:": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Wikipedia": {
+      "attributes": {
+        "Type": "Knowledge source.",
+        "Usage": "LLMs are pretrained on Wikipedia.",
+        "description": "Used as a knowledge base for generating questions and evaluating LLMs.",
+        "document structure": "Each page is a document with a preprocessed abstract, and sections are mapped as paragraphs.",
+        "categories": "Divided into thirteen categories.",
+        "usage": "Used to identify knowledge deficiencies in LLMs."
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Metro/Railway/Transportation Projects": {
+      "attributes": {
+        "type": "topic"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "systematic prompt design": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "gerund phrase": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "* reasoning models": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "Kunst Raum Riehen": {
+      "attributes": {
+        "type": "art space"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "* testee models": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "paragraph level": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "LDA": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "data coverage": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "misinformation": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "query budget": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "embedding dimension": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "probing agents": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "The text is about evaluating and comparing different methods for discovering errors and vulnerabilities in large language models (LLMs). It focuses on a method called Stochastic Error Ascent (SEA) and compares it with Automated Capability Discovery (ACD) and AutoBencher. The text discusses the experimental setup, including the use of Wikipedia as a knowledge base, the generation of questions using an LLM, and the evaluation of model accuracy. It also presents results on the number of errors discovered, error rates, and cost analysis. Additionally, it includes ablation studies to analyze the contribution of different components of SEA and a convergence analysis to understand its behavior over time.": {
+      "attributes": {},
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "BERT": {
+      "attributes": {
+        "type": "model"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    },
+    "VITRINE": {
+      "attributes": {
+        "type": "art gallery"
+      },
+      "source_uri": "2503.23361v1.pdf"
+    }
+  },
+  "edges": []
+}
