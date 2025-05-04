@@ -31,7 +31,7 @@ def translate_messages_from_openai_to_gemini(
 
 class BasicAgent:
     def __init__(self):
-        """Initializes the BasicAgent, loading configuration. brrr"""
+        """Initializes the BasicAgent, loading configuration. brraaa"""
         config_path = os.path.join("src", "llms", "llm_config.yaml")
         try:
             with open(config_path, "r") as file:
