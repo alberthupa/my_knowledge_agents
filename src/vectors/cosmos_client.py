@@ -10,7 +10,7 @@ https://github.com/AzureCosmosDB/multi-agent-langgraph/blob/main/src/app/azure_c
 https://github.com/AzureCosmosDB/banking-multi-agent-workshop/blob/main/python/src/app/services/azure_cosmos_db.py
 '''
 
-load_dotenv()
+
 # --- Configuration ---
 # Replace with your actual connection string, database name, and container name
 # It's recommended to use environment variables for sensitive information
