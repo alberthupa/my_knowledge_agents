@@ -3,18 +3,9 @@ import os
 from langchain_openai.embeddings import AzureOpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_core.documents import Document
-
+from openai import OpenAI
 
 load_dotenv()
-
-
-'''
-# TODO: add
-from sentence_transformers import SentenceTransformer
-model = SentenceTransformer('all-MiniLM-L6-v2')
-emb = model.encode("your text here")
-'''
-
 
 
 class DefaultEmbeddings:
@@ -41,13 +32,13 @@ class VectorStore:
                 )
             else:
                 return None
-                
+
     def save_or_update_vector_store(self, documents, embeddings):
         """Create a new vector store or update existing one with documents"""
         import shutil
-        
+
         existing_db = self.load_vector_store(embeddings)
-        
+
         if existing_db is None:
             # Create new vector store
             new_db = FAISS.from_documents(documents, embeddings)
@@ -64,7 +55,7 @@ class VectorStore:
     def drop_vector_store(self):
         """Delete the vector store directory"""
         import shutil
-        
+
         if os.path.exists(self.name):
             shutil.rmtree(self.name)
             print(f"Vector store '{self.name}' has been deleted.")
@@ -73,10 +64,10 @@ class VectorStore:
             print(f"Vector store '{self.name}' does not exist.")
             return False
 
+
 if __name__ == "__main__":
-    
+    """
     db_path = "vector_database"
-    
     if not os.path.exists(db_path):
         print(f"No vector database found at {db_path}")
     else:
@@ -84,26 +75,33 @@ if __name__ == "__main__":
             embeddings = DefaultEmbeddings().set_embeddings()
             vector_store = VectorStore(db_path)
             loaded_vector_store = vector_store.load_vector_store(embeddings)
-            
+
             if loaded_vector_store:
                 print("Vector store loaded successfully.")
-                
+
                 # Get and count documents (using a generic query to retrieve samples)
                 sample_docs = loaded_vector_store.similarity_search("", k=100)
                 doc_count = len(sample_docs)
-                
+
                 # For FAISS, we can get the actual index size
                 if hasattr(loaded_vector_store, "index"):
                     doc_count = loaded_vector_store.index.ntotal
-                
+
                 print(f"Total documents in vector store: {doc_count}")
-                
+
                 # Print first 10 chars of first 3 documents
                 for i, doc in enumerate(sample_docs[:3]):
-                    preview = doc.page_content[:10] + "..." if len(doc.page_content) > 10 else doc.page_content
+                    preview = (
+                        doc.page_content[:10] + "..."
+                        if len(doc.page_content) > 10
+                        else doc.page_content
+                    )
                     print(f"Document {i+1} preview: '{preview}'")
-                    
+
             else:
-                print("Failed to load vector store - database may be corrupted or incompatible.")
+                print(
+                    "Failed to load vector store - database may be corrupted or incompatible."
+                )
         except Exception as e:
             print(f"Error loading vector store: {str(e)}")
+    """

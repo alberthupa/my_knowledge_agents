@@ -120,7 +120,8 @@ class SimpleCosmosClient:
 # Configuration variables (as provided by the user)
 COSMOS_CONNECTION_STRING = os.environ.get("COSMOS_CONNECTION_STRING")
 DATABASE_NAME = "hupi-loch"
-CONTAINER_NAME = "knowledge-chunks"
+# CONTAINER_NAME = "knowledge-chunks"
+CONTAINER_NAME = "test_container"
 PARTITION_KEY_PATH = "/id"
 
 # Vector embedding policy (as provided by the user)

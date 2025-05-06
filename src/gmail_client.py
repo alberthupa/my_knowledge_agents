@@ -115,6 +115,7 @@ for msg in results.get("messages", []):
     cleaned_body = clean_markdown(markdown_body)
 
     output = {
+        "source": "newsletters",
         "subject": subject,
         "from": sender,
         "date": date,
