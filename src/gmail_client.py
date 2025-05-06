@@ -10,6 +10,10 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 """
+
+
+https://chatgpt.com/c/6819eaea-9194-800a-bcec-b9240593ecec
+
 However, even if Zapier's dedicated "Azure Functions" action has limitations or complexities, there's a very common and flexible way to make Zapier talk to an Azure Function: __using Zapier's generic "Webhooks" action.__
 
 Here's how that would work:
