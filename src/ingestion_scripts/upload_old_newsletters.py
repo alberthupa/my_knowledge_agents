@@ -4,6 +4,9 @@ import json
 import re
 import base64
 from datetime import datetime, timedelta, date as py_date  # Renamed to avoid conflict
+import time
+import tiktoken  # Add tiktoken for token counting
+
 
 from azure.cosmos import CosmosClient, exceptions
 from src.vectors.embeddings_clients import OpenAIEmbeddings
@@ -18,12 +21,56 @@ load_dotenv(override=True)
 # --- Environment Variables & Constants ---
 COSMOS_CONNECTION_STRING = os.environ.get("COSMOS_CONNECTION_STRING")
 DATABASE_NAME = "hupi-loch"
-CONTAINER_NAME = "test_container"
-
+CONTAINER_NAME = "knowledge-chunks"  # Replace with your container name
 
 GMAIL_REFRESH_TOKEN = os.environ.get("GMAIL_REFRESH_TOKEN")
 GMAIL_CLIENT_ID = os.environ.get("GMAIL_CLIENT_ID")
 GMAIL_CLIENT_SECRET = os.environ.get("GMAIL_CLIENT_SECRET")
+
+
+# --- Token handling functions ---
+def count_tokens(text: str) -> int:
+    """Count the number of tokens in a text using the cl100k_base encoding."""
+    encoding = tiktoken.get_encoding("cl100k_base")
+    tokens = encoding.encode(text)
+    return len(tokens)
+
+
+def chunk_text(text: str, max_tokens: int = 8000) -> list:
+    """
+    Split text into chunks that don't exceed the maximum token limit.
+
+    Args:
+        text: The input text to chunk
+        max_tokens: Maximum number of tokens per chunk (default: 8000)
+
+    Returns:
+        A list of text chunks
+    """
+    encoding = tiktoken.get_encoding("cl100k_base")
+    tokens = encoding.encode(text)
+
+    if len(tokens) <= max_tokens:
+        return [text]
+
+    chunks = []
+    current_chunk_tokens = []
+
+    for token in tokens:
+        current_chunk_tokens.append(token)
+
+        if len(current_chunk_tokens) >= max_tokens:
+            chunk_text = encoding.decode(current_chunk_tokens)
+            chunks.append(chunk_text)
+            current_chunk_tokens = []
+
+    # Add any remaining tokens
+    if current_chunk_tokens:
+        chunk_text = encoding.decode(current_chunk_tokens)
+        chunks.append(chunk_text)
+
+    return chunks
+
 
 # --- OpenAI Embeddings Client ---
 try:
@@ -57,8 +104,6 @@ def get_cosmos_client(connection_string):
             )
         print(f"Attempting to connect to Cosmos DB at URI: {uri}")
         client = CosmosClient(uri, credential=key)
-        # Test connection by listing databases (optional, can be slow)
-        # list(client.list_databases())
         print("CosmosClient initialized successfully.")
         return client
     except ValueError as ve:
@@ -79,8 +124,6 @@ def get_container_client(client, database_name, container_name):
         print(f"Successfully got database client for '{database_name}'.")
         container = database.get_container_client(container_name)
         print(f"Successfully got container client for '{container_name}'.")
-        # Test container read (optional)
-        # container.read()
         print(
             f"Successfully connected to database '{database_name}' and container '{container_name}'."
         )
@@ -107,12 +150,10 @@ def check_item_exists(container, item_id):
     """Checks if an item with the given ID exists in the container."""
     if not container:
         print(f"Debug: Container not available for checking item {item_id}.")
-        return False  # Cannot confirm, assume not exists or handle error
+        return False
     try:
         print(f"Debug: Checking if item with id '{item_id}' exists in Cosmos DB...")
-        container.read_item(
-            item=item_id, partition_key=item_id
-        )  # Assuming id is also the partition key
+        container.read_item(item=item_id, partition_key=item_id)
         print(f"Debug: Item with id '{item_id}' FOUND in Cosmos DB.")
         return True
     except exceptions.CosmosResourceNotFoundError:
@@ -120,7 +161,7 @@ def check_item_exists(container, item_id):
         return False
     except exceptions.CosmosHttpResponseError as e:
         print(f"Debug: Error checking item '{item_id}': {e}. Assuming not found.")
-        return False  # Or re-raise depending on desired error handling
+        return False
     except Exception as e:
         print(
             f"Debug: Unexpected error checking item '{item_id}': {e}. Assuming not found."
@@ -141,7 +182,7 @@ def upload_text_chunk(
         print(f"Debug: Container not available for uploading item {item_id}.")
         return
     document = {
-        "id": item_id,  # This will also be used as the partition key if PK is /id
+        "id": item_id,
         "text": text_content,
         "tags": tags,
         "embedding": vector_embedding,
@@ -150,7 +191,6 @@ def upload_text_chunk(
         document.update(custom_properties)
 
     print(f"Debug: Preparing to upload document with id: {item_id}")
-    # print(f"Debug: Document content (first 100 chars of text): {json.dumps(document, default=str)[:200]}...")
 
     try:
         container.upsert_item(document)
@@ -191,25 +231,22 @@ def get_gmail_service():
 
 def clean_markdown(md):
     """Cleans markdown text extracted from HTML emails."""
-    # Remove tracking pixels and common unwanted elements
     md = re.sub(r"!\[\]\(https://track\.[^\)]+\)", "", md)
     md = re.sub(r"\[View in browser\]\([^\)]+\)", "", md, flags=re.I)
     md = re.sub(
         r"\[.*?\]\((https?://(?:track\.aisecret\.us|click\.convertkit-mail2\.com|mandrillapp\.com|clicks\.mlsend\.com|click\.sender\.net|t\.dripemail2\.com|click\.revue\.email|ct\.beehiiv\.com|clicks\.aweber\.com|hubspotlinks\.com|getresponse\.com|substack\.com|mailerlite\.com|sendgrid\.net|sparkpostmail\.com|amazonseS\.com)[^\)]+)\)",
         "",
         md,
-    )  # Common tracking domains
-    md = re.sub(
-        r"\[!\[\]\([^\)]+\)\]\([^\)]+\)", "", md
-    )  # Image links that are also links
-    md = re.sub(
-        r"^\s*> \[.*?SPONSORED.*?\]\(.*?\)\s*$", "", md, flags=re.M | re.I
-    )  # Sponsored content blocks
-    md = re.sub(r"\*\s?\*\s?\*", "", md)  # Horizontal rules like ***
-    md = re.sub(r"---+", "", md)  # Other horizontal rules
-    md = re.sub(r"\|\s?.*?\s?\|", "", md)  # Table-like structures (simple ones)
+    )
+    md = re.sub(r"\[!\[\]\([^\)]+\)\]\([^\)]+\)", "", md)
+    md = re.sub(r"^\s*> \[.*?SPONSORED.*?\]\(.*?\)\s*$", "", md, flags=re.M | re.I)
 
-    # Remove unsubscribe links and everything after them (common pattern)
+    md = re.sub(r"\[(.*?)\]\([^\)]+\)", r"\1", md)
+
+    md = re.sub(r"\*\s?\*\s?\*", "", md)
+    md = re.sub(r"---+", "", md)
+    md = re.sub(r"\|\s?.*?\s?\|", "", md)
+
     unsubscribe_patterns = [
         r"https://track\.aisecret\.us/track/unsubscribe\.do\?",
         r"If you wish to stop receiving our emails.*?click here",
@@ -222,18 +259,29 @@ def clean_markdown(md):
     for pattern in unsubscribe_patterns:
         md = re.split(pattern, md, flags=re.I)[0].strip()
 
-    md = re.sub(r"\n{3,}", "\n\n", md)  # Reduce multiple newlines to two
-    md = re.sub(r" +\n", "\n", md)  # Trim trailing spaces from lines
-    md = re.sub(r"\n +", "\n", md)  # Trim leading spaces from lines
+    # Fix isolated characters between newlines (like "\n\n!\n\n")
+    md = re.sub(
+        r"\n\n([^\w\s]{1,3})\n\n", r" \1 ", md
+    )  # Handle isolated punctuation/symbols
+    md = re.sub(r"\n\n([a-zA-Z])\n\n", r" \1 ", md)  # Handle isolated single letters
+    md = re.sub(
+        r"(\w)\n\n([^\w\s]{1,2})\n\n(\w)", r"\1 \2 \3", md
+    )  # Words with punctuation between
 
-    # Remove lines that are just image placeholders or decorative characters
+    # General newline cleanup
+    md = re.sub(r"\n{3,}", "\n\n", md)
+    md = re.sub(r" +\n", "\n", md)
+    md = re.sub(r"\n +", "\n", md)
+
+    # Fix remaining adjacent newlines with single character in between
+    md = re.sub(r"(\w)\n([^\w\s])\n(\w)", r"\1 \2 \3", md)
+
+    # Remove isolated newlines that should be spaces
+    md = re.sub(r"([a-zA-Z])\n([a-zA-Z])", r"\1 \2", md)
+
     md = re.sub(r"^\s*\[image:.*?\]\s*$", "", md, flags=re.M | re.I)
-    md = re.sub(
-        r"^\s*!\[.*?\]\(.*?\)\s*$", "", md, flags=re.M | re.I
-    )  # Standalone image markdown
-    md = re.sub(
-        r"^\s*[-=_\*#]{3,}\s*$", "", md, flags=re.M
-    )  # Lines with only separators
+    md = re.sub(r"^\s*!\[.*?\]\(.*?\)\s*$", "", md, flags=re.M | re.I)
+    md = re.sub(r"^\s*[-=_\*#]{3,}\s*$", "", md, flags=re.M)
 
     return md.strip()
 
@@ -263,17 +311,9 @@ def process_newsletters_for_date(
         print(f"Error: Invalid date format '{target_date_str}'. Please use YYYY-MM-DD.")
         return
 
-    # Gmail search query for the specific day
-    # Gmail API uses timestamps, so we define a 24-hour window
-    # For date YYYY/MM/DD, search from YYYY/MM/DD 00:00:00 to YYYY/MM/DD 23:59:59
-    # Gmail search format is 'after:YYYY/MM/DD before:YYYY/MM/DD' (exclusive for before)
-    # So, for a single day, use after:YYYY/MM/DD before:YYYY/MM/(DD+1)
-
     date_after = target_dt.strftime("%Y/%m/%d")
     date_before = (target_dt + timedelta(days=1)).strftime("%Y/%m/%d")
     query = f"after:{date_after} before:{date_before}"
-    # Optional: Add label filter if newsletters are consistently labeled
-    # query += " label:your-newsletter-label"
     print(f"Debug: Gmail search query: '{query}'")
 
     try:
@@ -282,7 +322,7 @@ def process_newsletters_for_date(
             .messages()
             .list(userId="me", q=query, labelIds=["Label_58"], maxResults=50)
             .execute()
-        )  # Increased maxResults
+        )
     except Exception as e:
         print(f"Error querying Gmail: {e}")
         return
@@ -322,11 +362,9 @@ def process_newsletters_for_date(
 
         try:
             parsed_date_obj = parsedate_to_datetime(raw_date_header)
-            message_date_iso = parsed_date_obj.date().isoformat()  # YYYY-MM-DD
+            message_date_iso = parsed_date_obj.date().isoformat()
         except Exception:
-            message_date_iso = (
-                target_date_str  # Fallback to target date if parsing fails
-            )
+            message_date_iso = target_date_str
 
         print(f"Debug: Subject: {subject}")
         print(f"Debug: From: {sender}")
@@ -351,8 +389,8 @@ def process_newsletters_for_date(
             continue
 
         h = html2text.HTML2Text()
-        h.ignore_links = False  # Keep links for context, cleaning will handle bad ones
-        h.body_width = 0  # Don't wrap lines
+        h.ignore_links = False
+        h.body_width = 0
         markdown_body = h.handle(decoded_html)
         cleaned_body = clean_markdown(markdown_body)
 
@@ -364,60 +402,96 @@ def process_newsletters_for_date(
             f"Debug: Cleaned content (first 100 chars): {cleaned_body[:100].replace(chr(10), ' ')}..."
         )
 
-        # Calculate embeddings
-        if embeddings_client_instance:
-            try:
-                print(f"Debug: Calculating embeddings for message ID {msg_id}...")
-                # Combine subject and body for embedding for better context
-                text_to_embed = f"Subject: {subject}\n\n{cleaned_body}"
-                embeddings_result = embeddings_client_instance.get_openai_embedding(
-                    text_to_embed
-                )
-                calculated_embeddings = embeddings_result.data[0].embedding
-                print(
-                    f"Debug: Embeddings calculated successfully for message ID {msg_id}."
-                )
-            except Exception as e:
-                print(f"Error calculating embeddings for message ID {msg_id}: {e}")
-                calculated_embeddings = None  # Proceed without embeddings or skip
-        else:
-            print(
-                "Debug: Embeddings client not available. Skipping embedding calculation."
-            )
-            calculated_embeddings = None
+        text_to_embed = f"Subject: {subject}\n\n{cleaned_body}"
+        token_count = count_tokens(text_to_embed)
+        print(f"Debug: Text has {token_count} tokens")
 
-        custom_props = {
-            "source": "gmail_newsletter",
-            "subject": subject,
-            "from_sender": sender,  # Renamed to avoid conflict if 'from' is a keyword
-            "received_date": message_date_iso,  # Date from email header
-            "processing_target_date": target_date_str,  # Date used for the query
-            "gmail_message_id": msg_id,
-            "retrieved_at": datetime.utcnow().isoformat() + "Z",
-        }
-
-        upload_text_chunk(
-            container_client,
-            item_id=msg_id,  # Use Gmail message ID as the document ID
-            text_content=cleaned_body,
-            tags=["newsletter", sender, subject[:50]],  # Example tags
-            vector_embedding=calculated_embeddings,
-            custom_properties=custom_props,
+        # Fixed: Renamed variable to avoid conflict with the function name
+        text_chunks_list = (
+            chunk_text(text_to_embed) if token_count > 8000 else [text_to_embed]
         )
-        print(f"Debug: Upload process initiated for message ID {msg_id}.")
+        print(f"Debug: Text split into {len(text_chunks_list)} chunks")
+
+        for chunk_index, chunk_content in enumerate(text_chunks_list):
+            chunk_msg_id = (
+                msg_id
+                if len(text_chunks_list) == 1
+                else f"{msg_id}_chunk_{chunk_index}"
+            )
+
+            if check_item_exists(container_client, chunk_msg_id):
+                print(
+                    f"Debug: Chunk ID {chunk_msg_id} already exists in Cosmos DB. Skipping."
+                )
+                continue
+
+            if embeddings_client_instance:
+                try:
+                    print(
+                        f"Debug: Calculating embeddings for chunk {chunk_index+1}/{len(text_chunks_list)}..."
+                    )
+                    embeddings_result = embeddings_client_instance.get_openai_embedding(
+                        chunk_content
+                    )
+                    calculated_embeddings = embeddings_result.data[0].embedding
+                    print(
+                        f"Debug: Embeddings calculated successfully for chunk {chunk_index+1}."
+                    )
+                except Exception as e:
+                    print(
+                        f"Error calculating embeddings for chunk {chunk_index+1}: {e}"
+                    )
+                    calculated_embeddings = None
+            else:
+                print(
+                    "Debug: Embeddings client not available. Skipping embedding calculation."
+                )
+                calculated_embeddings = None
+
+            custom_props = {
+                "source": "gmail_newsletter",
+                "subject": subject,
+                "author": sender,
+                "chunk_date": message_date_iso,
+                "processing_target_date": target_date_str,
+                "gmail_message_id": msg_id,
+                "ingestion_date": datetime.utcnow().isoformat() + "Z",
+            }
+
+            if len(text_chunks_list) > 1:
+                custom_props.update(
+                    {
+                        "is_chunk": True,
+                        "chunk_index": chunk_index,
+                        "total_chunks": len(text_chunks_list),
+                        "original_id": msg_id,
+                    }
+                )
+
+            upload_text_chunk(
+                container_client,
+                item_id=chunk_msg_id,
+                text_content=chunk_content.replace("Subject: ", "", 1)
+                if chunk_content.startswith("Subject: ")
+                else chunk_content,
+                tags=["newsletter", sender, subject[:50]],
+                vector_embedding=calculated_embeddings,
+                custom_properties=custom_props,
+            )
+            print(
+                f"Debug: Upload process initiated for chunk {chunk_index+1}/{len(text_chunks_list)}."
+            )
 
 
 if __name__ == "__main__":
-    print("--- Starting Newsletter Ingestion Script (Debug Mode - Single Day) ---")
+    print("--- Starting Newsletter Ingestion Script (Historical Processing) ---")
 
-    # For debugging, process today's date.
-    # You can change this to a specific date string like "2025-05-05"
-    # TARGET_DATE = py_date.today().strftime("%Y-%m-%d")
-    TARGET_DATE = "2025-05-05"  # Example: specific date
+    start_date = datetime(2025, 1, 1).date()
+    end_date = py_date.today()
+    current_date = start_date
 
-    print(f"Debug: Target processing date set to: {TARGET_DATE}")
+    print(f"Debug: Processing newsletters from {start_date} to {end_date}")
 
-    # Initialize clients
     gmail_service_instance = get_gmail_service()
     cosmos_client_instance = get_cosmos_client(COSMOS_CONNECTION_STRING)
 
@@ -427,16 +501,7 @@ if __name__ == "__main__":
             cosmos_client_instance, DATABASE_NAME, CONTAINER_NAME
         )
 
-    if (
-        gmail_service_instance and container_client_instance and embeddings_client
-    ):  # Check embeddings_client too
-        process_newsletters_for_date(
-            TARGET_DATE,
-            gmail_service_instance,
-            container_client_instance,
-            embeddings_client,
-        )
-    else:
+    if not all([gmail_service_instance, container_client_instance, embeddings_client]):
         print(
             "Error: One or more services (Gmail, Cosmos DB, OpenAI Embeddings) could not be initialized. Exiting."
         )
@@ -446,5 +511,19 @@ if __name__ == "__main__":
             print("Debug: Cosmos container client failed to initialize.")
         if not embeddings_client:
             print("Debug: OpenAI embeddings client failed to initialize.")
+    else:
+        while current_date <= end_date:
+            target_date_str = current_date.strftime("%Y-%m-%d")
+            print(f"\n--- Processing date: {target_date_str} ---")
 
-    print("--- Newsletter Ingestion Script Finished ---")
+            process_newsletters_for_date(
+                target_date_str,
+                gmail_service_instance,
+                container_client_instance,
+                embeddings_client,
+            )
+
+            current_date += timedelta(days=1)
+
+            if current_date <= end_date:
+                print(f"Sleeping for 60 seconds before processing the next date...")

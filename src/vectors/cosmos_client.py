@@ -27,6 +27,7 @@ class SimpleCosmosClient:
         self.indexing_policy = indexing_policy
         self.cosmos_client = None
         self.database_client = None
+        self.container_client = None
 
     def connect(self):
         """
@@ -56,23 +57,32 @@ class SimpleCosmosClient:
             )
             print(f"Database '{self.database_name}' client obtained.")
 
+            # get container client
+            self.container_client = self.database_client.get_container_client(
+                self.container_name
+            )
+
         except exceptions.CosmosResourceNotFoundError:
             print(
                 f"Error: Database '{self.database_name}' not found. Please ensure the database name is correct and exists."
             )
             self.database_client = None
+            self.container_client = None
         except ValueError as e:
             print(f"Connection string error: {e}")
             self.cosmos_client = None
             self.database_client = None
+            self.container_client = None
         except Exception as e:
             print(f"An unexpected error occurred during connection: {e}")
             self.cosmos_client = None
             self.database_client = None
+            self.container_client = None
 
     def create_knowledge_chunks_container(self):
         """
         Creates the 'knowledge_chunks' container with specified policies if it doesn't exist.
+        client.create_knowledge_chunks_container()
         """
         if not self.database_client:
             print("Cannot create container: Not connected to database.")
@@ -101,6 +111,7 @@ class SimpleCosmosClient:
     def delete_container(self, container_name: str):
         """
         Deletes the specified container.
+        client.delete_container(CONTAINER_NAME)
         """
         if not self.database_client:
             print("Cannot delete container: Not connected to database.")
@@ -120,8 +131,8 @@ class SimpleCosmosClient:
 # Configuration variables (as provided by the user)
 COSMOS_CONNECTION_STRING = os.environ.get("COSMOS_CONNECTION_STRING")
 DATABASE_NAME = "hupi-loch"
-# CONTAINER_NAME = "knowledge-chunks"
-CONTAINER_NAME = "test_container"
+CONTAINER_NAME = "knowledge-chunks"
+# CONTAINER_NAME = "test_container"
 PARTITION_KEY_PATH = "/id"
 
 # Vector embedding policy (as provided by the user)
@@ -171,10 +182,47 @@ if __name__ == "__main__":
         if client.database_client:
             # Example: Create the container
 
-            print("\nAttempting to create container...")
+            # print("\nAttempting to create container...")
 
             # Example: Delete the container (use with caution!)
             # print("\nAttempting to delete container...")
-            client.delete_container(CONTAINER_NAME)
+            # client.delete_container(CONTAINER_NAME)
 
-            client.create_knowledge_chunks_container()
+            # client.create_knowledge_chunks_container()
+
+            query_term = "gemini"
+
+            query = (
+                f"SELECT TOP 5 * FROM c where FullTextContains(c.text, '{query_term}')"
+            )
+            print(f"Query: {query}")
+            results = []
+            try:
+                # Assuming query_items returns an iterable; adjust if using async client
+                for item in client.container_client.query_items(
+                    query=query, enable_cross_partition_query=True
+                ):
+                    results.append(item)
+                print(f"Found {len(results)} results for vector search.")
+                # return results[:top_k]  # Return top_k results
+
+            except exceptions.CosmosHttpResponseError as e:
+                print(f"Error during vector search: {e}")
+                results = []
+
+            for r in results:
+
+                def extract_windows(context, query, N):
+                    context_lower = context.lower()
+                    query_lower = query.lower()
+                    positions = [
+                        i
+                        for i in range(len(context))
+                        if context_lower.startswith(query_lower, i)
+                    ]
+                    return [
+                        context[max(0, i - N) : i + len(query) + N] for i in positions
+                    ]
+
+                windows = extract_windows(r["text"], query_term, 50)
+                print(windows)
