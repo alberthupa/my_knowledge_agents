@@ -128,6 +128,60 @@ class SimpleCosmosClient:
         except Exception as e:
             print(f"An unexpected error occurred during container deletion: {e}")
 
+    def simple_search(query_term: str) -> str:
+        # query_term = "gemini"
+
+        query = f"SELECT TOP 5 * FROM c where FullTextContains(c.text, '{query_term}')"
+        print(f"Query: {query}")
+        results = []
+        try:
+            # Assuming query_items returns an iterable; adjust if using async client
+            for item in client.container_client.query_items(
+                query=query, enable_cross_partition_query=True
+            ):
+                results.append(item)
+            print(f"Found {len(results)} results for vector search.")
+            # return results[:top_k]  # Return top_k results
+
+        except exceptions.CosmosHttpResponseError as e:
+            print(f"Error during vector search: {e}")
+            results = []
+
+        for r in results:
+
+            def extract_windows(context, query, N):
+                context_lower = context.lower()
+                query_lower = query.lower()
+                positions = [
+                    i
+                    for i in range(len(context))
+                    if context_lower.startswith(query_lower, i)
+                ]
+                return [context[max(0, i - N) : i + len(query) + N] for i in positions]
+
+            windows = extract_windows(r["text"], query_term, 50)
+            return " ".join(windows)
+
+    def get_last_newsletter_date(self):
+        query = (
+            f"SELECT VALUE max(c.chunk_date) FROM c WHERE c.source = 'gmail_newsletter'"
+        )
+        results = []
+        try:
+            # Assuming query_items returns an iterable; adjust if using async client
+            for item in client.container_client.query_items(
+                query=query, enable_cross_partition_query=True
+            ):
+                results.append(item)
+            print(f"Found {len(results)} results for vector search.")
+            # return results[:top_k]  # Return top_k results
+
+        except exceptions.CosmosHttpResponseError as e:
+            print(f"Error during vector search: {e}")
+            results = []
+
+        return results[0]
+
 
 # Configuration variables (as provided by the user)
 COSMOS_CONNECTION_STRING = os.environ.get("COSMOS_CONNECTION_STRING")
@@ -191,39 +245,8 @@ if __name__ == "__main__":
 
             # client.create_knowledge_chunks_container()
 
-            query_term = "gemini"
+            # client.simple_search("gemini")
 
-            query = (
-                f"SELECT TOP 5 * FROM c where FullTextContains(c.text, '{query_term}')"
-            )
-            print(f"Query: {query}")
-            results = []
-            try:
-                # Assuming query_items returns an iterable; adjust if using async client
-                for item in client.container_client.query_items(
-                    query=query, enable_cross_partition_query=True
-                ):
-                    results.append(item)
-                print(f"Found {len(results)} results for vector search.")
-                # return results[:top_k]  # Return top_k results
-
-            except exceptions.CosmosHttpResponseError as e:
-                print(f"Error during vector search: {e}")
-                results = []
-
-            for r in results:
-
-                def extract_windows(context, query, N):
-                    context_lower = context.lower()
-                    query_lower = query.lower()
-                    positions = [
-                        i
-                        for i in range(len(context))
-                        if context_lower.startswith(query_lower, i)
-                    ]
-                    return [
-                        context[max(0, i - N) : i + len(query) + N] for i in positions
-                    ]
-
-                windows = extract_windows(r["text"], query_term, 50)
-                print(windows)
+            last_newsletter_date = client.get_last_newsletter_date()
+            print(f"Last newsletter date: {last_newsletter_date}")
+            print(type(last_newsletter_date))
