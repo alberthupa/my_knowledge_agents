@@ -61,6 +61,7 @@ class SimpleCosmosClient:
             self.container_client = self.database_client.get_container_client(
                 self.container_name
             )
+            print(f"container '{self.container_name}' client obtained.")
 
         except exceptions.CosmosResourceNotFoundError:
             print(
