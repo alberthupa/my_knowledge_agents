@@ -7,7 +7,7 @@ from datetime import datetime, timedelta, date as py_date
 import time
 import tiktoken
 
-
+import azure.functions as func
 from azure.cosmos import CosmosClient, exceptions
 
 """
@@ -630,12 +630,12 @@ def get_last_newsletter_date(container_client):
         return None
 
 
-
-if __name__ == "__main__":
-    print("--- Starting Newsletter Ingestion Script (Historical Processing) ---")
+# --- Azure Function Entry Point ---
+def main(mytimer: func.TimerRequest) -> None:
     utc_timestamp = datetime.utcnow().replace(tzinfo=None).isoformat()
 
-
+    if mytimer.past_due:
+        logging.info("The timer is past due!")
 
     logging.info("Python timer trigger function started at %s", utc_timestamp)
 
@@ -662,46 +662,46 @@ if __name__ == "__main__":
             logging.warning(
                 "OpenAI embeddings client not initialized. Embeddings will be skipped."
             )
-    else:
-        # Determine the date range for ingestion
-        last_downloaded_date = get_last_newsletter_date(container_client_instance)
-        today = py_date.today()
+        return  # Exit the function if critical clients are missing
 
-        
-        if last_downloaded_date:
-            # Start from the day after the last downloaded date
-            start_date = last_downloaded_date + timedelta(days=1)
-            logging.info(
-                f"Last downloaded date found: {last_downloaded_date}. Starting ingestion from {start_date}."
-            )
-        else:
-            # Start from today minus 7 days as per user's preference
-            start_date = today - timedelta(days=7)
-            logging.info(
-                f"No last downloaded date found. Starting initial ingestion from {start_date} (today - 7 days)."
-            )
+    # Determine the date range for ingestion
+    last_downloaded_date = get_last_newsletter_date(container_client_instance)
+    today = py_date.today()
 
-        end_date = today  # Ingest up to and including today
-
-        logging.info(f"Ingestion date range: {start_date} to {end_date}")
-
-        # Iterate through the date range and process newsletters for each day
-        current_date = start_date
-        while current_date <= end_date:
-            target_date_str = current_date.strftime("%Y-%m-%d")
-            logging.info(f"\n--- Processing date: {target_date_str} ---")
-
-            process_newsletters_for_date(
-                target_date_str,
-                gmail_service_instance,
-                container_client_instance,
-                embeddings_client,  # Pass the embeddings client instance
-            )
-
-            current_date += timedelta(days=1)
-            # No need for sleep in Azure Function timer trigger between dates
-
+    if last_downloaded_date:
+        # Start from the day after the last downloaded date
+        start_date = last_downloaded_date + timedelta(days=1)
         logging.info(
-            "Python timer trigger function finished at %s",
-            datetime.utcnow().replace(tzinfo=None).isoformat(),
+            f"Last downloaded date found: {last_downloaded_date}. Starting ingestion from {start_date}."
         )
+    else:
+        # Start from today minus 7 days as per user's preference
+        start_date = today - timedelta(days=7)
+        logging.info(
+            f"No last downloaded date found. Starting initial ingestion from {start_date} (today - 7 days)."
+        )
+
+    end_date = today  # Ingest up to and including today
+
+    logging.info(f"Ingestion date range: {start_date} to {end_date}")
+
+    # Iterate through the date range and process newsletters for each day
+    current_date = start_date
+    while current_date <= end_date:
+        target_date_str = current_date.strftime("%Y-%m-%d")
+        logging.info(f"\n--- Processing date: {target_date_str} ---")
+
+        process_newsletters_for_date(
+            target_date_str,
+            gmail_service_instance,
+            container_client_instance,
+            embeddings_client,  # Pass the embeddings client instance
+        )
+
+        current_date += timedelta(days=1)
+        # No need for sleep in Azure Function timer trigger between dates
+
+    logging.info(
+        "Python timer trigger function finished at %s",
+        datetime.utcnow().replace(tzinfo=None).isoformat(),
+    )

@@ -250,3 +250,11 @@ if __name__ == "__main__":
             last_newsletter_date = client.get_last_newsletter_date()
             print(f"Last newsletter date: {last_newsletter_date}")
             print(type(last_newsletter_date))
+
+
+            '''
+            SELECT c.chunk_date, c.subject, c.text
+            FROM c
+            WHERE c.chunk_date >= "2025-05-04"
+            order by c.chunk_date desc
+            '''
