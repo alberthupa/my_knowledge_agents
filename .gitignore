@@ -1,6 +1,7 @@
 venv/
 graph_database/
 sources/
+notes/
 .env
 __pycache__/
 key_for_git
