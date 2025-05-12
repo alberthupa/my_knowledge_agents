@@ -10,6 +10,9 @@ from sentence_transformers import SentenceTransformer
 model = SentenceTransformer('all-MiniLM-L6-v2')
 emb = model.encode("your text here")
 You can run it locally in the Azure Function using ONNX or PyTorch.
+
+https://jina.ai/models/jina-embeddings-v3/
+
 """
 
 
