@@ -3,7 +3,7 @@ import argparse
 import re
 from datetime import datetime
 from azure.cosmos import exceptions
-from src.vectors.cosmos_client import SimpleCosmosClient
+from src.vectors.cosmos_client import CosmosClient
 
 # Configuration variables
 COSMOS_CONNECTION_STRING = os.environ.get("COSMOS_CONNECTION_STRING")
@@ -36,7 +36,7 @@ def simplify_filename(subject, date_str):
     return f"{formatted_date}_{simplified_subject}"
 
 
-def retrieve_last_n_notes(client: SimpleCosmosClient, n: int):
+def retrieve_last_n_notes(client: CosmosClient, n: int):
     """Retrieves the last N notes from Cosmos DB."""
     if not client.container_client:
         print("Cosmos DB container client not available.")
@@ -116,7 +116,7 @@ if __name__ == "__main__":
             full_text_policy,
         )
 
-        client = SimpleCosmosClient(
+        client = CosmosClient(
             connection_string=COSMOS_CONNECTION_STRING,
             database_name=DATABASE_NAME,
             container_name=CONTAINER_NAME,

@@ -6,6 +6,121 @@ load_dotenv(override=True)
 
 
 class SimpleCosmosClient:
+    def __init__(
+        self,
+        connection_string: str,
+        database_name: str,
+        container_name: str,
+        partition_key_path: str,
+    ):
+        self.connection_string = connection_string
+        self.database_name = database_name
+        self.container_name = container_name
+        self.partition_key_path = partition_key_path
+        self.cosmos_client = None
+        self.database_client = None
+        self.container_client = None
+
+    def connect(self):
+        """
+        Connects to the Cosmos DB account and gets the database client.
+        """
+        try:
+            # Parse connection string (inspired by cosmos_sketches.py)
+            parts = self.connection_string.split(";")
+            uri = None
+            key = None
+            for part in parts:
+                if part.startswith("AccountEndpoint="):
+                    uri = part.split("=")[1]
+                elif part.startswith("AccountKey="):
+                    key_start_index = part.find("=") + 1
+                    key = part[key_start_index:]
+
+            if not uri or not key:
+                raise ValueError("Invalid connection string format")
+
+            self.cosmos_client = CosmosClient(uri, key)
+            print("CosmosClient initialized successfully.")
+
+            # Get database client
+            self.database_client = self.cosmos_client.get_database_client(
+                self.database_name
+            )
+            print(f"Database '{self.database_name}' client obtained.")
+
+            # get container client
+            self.container_client = self.database_client.get_container_client(
+                self.container_name
+            )
+            print(f"container '{self.container_name}' client obtained.")
+
+        except exceptions.CosmosResourceNotFoundError:
+            print(
+                f"Error: Database '{self.database_name}' not found. Please ensure the database name is correct and exists."
+            )
+            self.database_client = None
+            self.container_client = None
+        except ValueError as e:
+            print(f"Connection string error: {e}")
+            self.cosmos_client = None
+            self.database_client = None
+            self.container_client = None
+        except Exception as e:
+            print(f"An unexpected error occurred during connection: {e}")
+            self.cosmos_client = None
+            self.database_client = None
+            self.container_client = None
+
+    def get_last_newsletter_date(self):
+        query = (
+            "SELECT VALUE max(c.chunk_date) FROM c WHERE c.source = 'gmail_newsletter'"
+        )
+        results = []
+        try:
+            # Assuming query_items returns an iterable; adjust if using async client
+            for item in self.container_client.query_items(
+                query=query, enable_cross_partition_query=True
+            ):
+                results.append(item)
+            print(f"Found {len(results)} results for vector search.")
+            # return results[:top_k]  # Return top_k results
+
+        except exceptions.CosmosHttpResponseError as e:
+            print(f"Error during vector search: {e}")
+            results = []
+
+        return results[0]
+
+    def get_notes_from_day(self, date_to_search: str):
+        """Retrieves the last N notes from Cosmos DB."""
+        if not self.container_client:
+            print("Cosmos DB container client not available.")
+            return []
+
+        # Query to get the last N items ordered by chunk_date descending
+        query = f"SELECT c.chunk_date, c.subject, c.text FROM c WHERE c.chunk_date >= '{date_to_search}'"
+        print(f"Executing query: {query}")
+
+        results = []
+        try:
+            # Assuming query_items returns an iterable
+            for item in self.container_client.query_items(
+                query=query, enable_cross_partition_query=True
+            ):
+                results.append(item)
+            print(f"Found {len(results)} notes.")
+            return results
+
+        except exceptions.CosmosHttpResponseError as e:
+            print(f"Error during query: {e}")
+            return []
+        except Exception as e:
+            print(f"An unexpected error occurred during query: {e}")
+            return []
+
+
+class LargeCosmosClient:
     """
     A simple client for interacting with Azure Cosmos DB.
     """
@@ -251,10 +366,9 @@ if __name__ == "__main__":
             print(f"Last newsletter date: {last_newsletter_date}")
             print(type(last_newsletter_date))
 
-
-            '''
+            """
             SELECT c.chunk_date, c.subject, c.text
             FROM c
             WHERE c.chunk_date >= "2025-05-04"
             order by c.chunk_date desc
-            '''
+            """
