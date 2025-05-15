@@ -83,7 +83,7 @@ class SimpleCosmosClient:
                 query=query, enable_cross_partition_query=True
             ):
                 results.append(item)
-            print(f"Found {len(results)} results for vector search.")
+            # print(f"Found {len(results)} results for vector search.")
             # return results[:top_k]  # Return top_k results
 
         except exceptions.CosmosHttpResponseError as e:
@@ -99,7 +99,7 @@ class SimpleCosmosClient:
             return []
 
         # Query to get the last N items ordered by chunk_date descending
-        query = f"SELECT c.chunk_date, c.subject, c.text FROM c WHERE c.chunk_date >= '{date_to_search}'"
+        query = f"SELECT c.id, c.chunk_date, c.subject, c.text FROM c WHERE c.chunk_date >= '{date_to_search}'"
         print(f"Executing query: {query}")
 
         results = []
@@ -109,7 +109,7 @@ class SimpleCosmosClient:
                 query=query, enable_cross_partition_query=True
             ):
                 results.append(item)
-            print(f"Found {len(results)} notes.")
+            # print(f"Found {len(results)} notes.")
             return results
 
         except exceptions.CosmosHttpResponseError as e:

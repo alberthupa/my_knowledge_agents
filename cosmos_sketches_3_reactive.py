@@ -15,7 +15,7 @@ cosmos = SimpleCosmosClient(
     partition_key_path=PARTITION_KEY_PATH,
 )
 cosmos.connect()
-last_notes_str=str(cosmos.get_notes_from_day(cosmos.get_last_newsletter_date()))
+last_notes_str = str(cosmos.get_notes_from_day(cosmos.get_last_newsletter_date()))
 
 base_prompt = f"""This is a content of last newslettters about AI: {last_notes_str} ### 
 Identify all LLMs (both general names and specific models) mentioned in the text and tell what is the news or opinions about about it.
@@ -47,33 +47,40 @@ final values are lists of dictionaries with keys: model_name, news, opinion. Use
 
 """
 
-class Item(BaseModel): 
-    model_name:str; 
-    news:str; 
-    opinion:str
+
+class Item(BaseModel):
+    model_name: str
+    news: str
+    opinion: str
+
 
 class Payload(RootModel):
     root: dict[str, dict[str, list[Item]]]
 
-agent=BasicAgent()
 
-def query_llm(prompt,max_tries=3,model="gemini-2.0-flash-exp"):
-    p=prompt
+agent = BasicAgent()
+
+
+def query_llm(prompt, max_tries=3, model="gemini-2.0-flash-exp"):
+    p = prompt
     for _ in range(max_tries):
-        txt=agent.get_text_response_from_llm(model,messages=p,code_tag=None)["text_response"]
+        txt = agent.get_text_response_from_llm(model, messages=p, code_tag=None)[
+            "text_response"
+        ]
         if "```" in txt:
             parts = txt.split("```")
-            if len(parts) >= 3: 
+            if len(parts) >= 3:
                 txt = parts[1]
                 if txt.startswith("json"):
                     txt = txt[4:].strip()
         try:
-            data=json.loads(txt)
+            data = json.loads(txt)
             validated_data = Payload.model_validate(data)
             return validated_data.root
-        except (json.JSONDecodeError,ValidationError) as err:
-            p=f"{txt}\n\nYour JSON was invalid ({err}). Fix it and return only valid JSON."
+        except (json.JSONDecodeError, ValidationError) as err:
+            p = f"{txt}\n\nYour JSON was invalid ({err}). Fix it and return only valid JSON."
     raise RuntimeError("Failed to obtain valid payload after 3 attempts.")
 
-result=query_llm(base_prompt)
+
+result = query_llm(base_prompt)
 print(result)
