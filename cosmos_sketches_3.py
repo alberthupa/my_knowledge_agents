@@ -11,6 +11,7 @@ import json
 
 """
 https://chatgpt.com/c/6824f32a-2c70-800a-8080-e55fd2007674
+https://gemini.google.com/app/362b4f461787e386
 """
 
 
