@@ -17,14 +17,13 @@ https://gemini.google.com/app/362b4f461787e386
 
 COSMOS_CONNECTION_STRING = os.environ.get("COSMOS_CONNECTION_STRING")
 DATABASE_NAME = "hupi-loch"
-CONTAINER_NAME = "knowledge-chunks"
 PARTITION_KEY_PATH = "/id"
+# CONTAINER_NAME = "knowledge-chunks"
 
 
 cosmos_client = SimpleCosmosClient(
     connection_string=COSMOS_CONNECTION_STRING,
     database_name=DATABASE_NAME,
-    container_name=CONTAINER_NAME,
     partition_key_path=PARTITION_KEY_PATH,
 )
 
@@ -91,13 +90,17 @@ message_template = """This is a content of last newslettters about AI: {text}.
 """
 
 
-if cosmos_client.container_client:
-    last_date = cosmos_client.get_last_newsletter_date()
-    last_notes = cosmos_client.get_notes_from_day(last_date)
-
-    for note in last_notes:
-        message = message_template.format(text=note["text"])
-        cleaned_payload = query_llm(message, BasicAgent())
-        for tag, summary in cleaned_payload.items():
-            if len(summary.companies) > 0:
-                print(f"Companies: {summary.companies}")
+if cosmos_client:
+    last_date = cosmos_client.get_last_date("knowledge-chunks")
+    print(f"Last date: {last_date}")
+    last_notes = cosmos_client.get_notes_from_day("knowledge-chunks", last_date)
+    if len(last_notes) == 0:
+        print("No notes found.")
+        exit(1)
+    else:
+        for note in last_notes:
+            message = message_template.format(text=note["text"])
+            cleaned_payload = query_llm(message, BasicAgent())
+            for tag, summary in cleaned_payload.items():
+                if len(summary.companies) > 0:
+                    print(f"Companies: {summary.companies}")

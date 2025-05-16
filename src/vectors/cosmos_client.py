@@ -1,6 +1,7 @@
 import os
 from azure.cosmos import CosmosClient, PartitionKey, exceptions
 from dotenv import load_dotenv
+from typing import Optional, Any
 
 load_dotenv(override=True)
 
@@ -10,23 +11,21 @@ class SimpleCosmosClient:
         self,
         connection_string: str,
         database_name: str,
-        container_name: str,
         partition_key_path: str,
     ):
         self.connection_string = connection_string
         self.database_name = database_name
-        self.container_name = container_name
         self.partition_key_path = partition_key_path
         self.cosmos_client = None
         self.database_client = None
         self.container_client = None
 
-    def connect(self):
+    def connect(self) -> True:
         """
         Connects to the Cosmos DB account and gets the database client.
         """
+        print("Connecting to Cosmos DB...")
         try:
-            # Parse connection string (inspired by cosmos_sketches.py)
             parts = self.connection_string.split(";")
             uri = None
             key = None
@@ -43,56 +42,207 @@ class SimpleCosmosClient:
             self.cosmos_client = CosmosClient(uri, key)
             print("CosmosClient initialized successfully.")
 
-            # Get database client
             self.database_client = self.cosmos_client.get_database_client(
                 self.database_name
             )
             print(f"Database '{self.database_name}' client obtained.")
 
-            # get container client
-            self.container_client = self.database_client.get_container_client(
-                self.container_name
-            )
-            print(f"container '{self.container_name}' client obtained.")
+            return True
 
         except exceptions.CosmosResourceNotFoundError:
             print(
                 f"Error: Database '{self.database_name}' not found. Please ensure the database name is correct and exists."
             )
             self.database_client = None
-            self.container_client = None
         except ValueError as e:
             print(f"Connection string error: {e}")
             self.cosmos_client = None
             self.database_client = None
-            self.container_client = None
         except Exception as e:
             print(f"An unexpected error occurred during connection: {e}")
             self.cosmos_client = None
             self.database_client = None
-            self.container_client = None
 
-    def get_last_newsletter_date(self):
+    def run_query(self, container_name: str = None, query: str = None) -> list:
+        if container_name and query:
+            try:
+                container_client = self.database_client.get_container_client(
+                    container_name
+                )
+                print(f"container '{container_name}' client obtained.")
+            except Exception as e:
+                print(f"Failed to get container client: {e}")
+                return None
+
+            results = []
+            try:
+                for item in container_client.query_items(
+                    query=query, enable_cross_partition_query=True
+                ):
+                    results.append(item)
+            except exceptions.CosmosHttpResponseError as e:
+                print(f"Error executing query: {e}")
+                results = []
+            return results
+
+        missing = []
+        if not container_name:
+            missing.append("container_name")
+        if not query:
+            missing.append("query")
+        print(f"Missing required parameter(s): {', '.join(missing)}.")
+        return None
+
+    def get_last_date(self, container_name: str = None) -> str:
         query = (
             "SELECT VALUE max(c.chunk_date) FROM c WHERE c.source = 'gmail_newsletter'"
         )
-        results = []
+        if container_name:
+            results = self.run_query(container_name, query)
+            return results[0] if results else None
+        else:
+            print("Container name is required to get the last date.")
+            return None
+
+    def get_notes_from_day(
+        self, container_name: str = None, date_to_search: str = None
+    ) -> list:
+        if container_name and date_to_search:
+            query = f"SELECT c.id, c.chunk_date, c.subject, c.text FROM c WHERE c.chunk_date >= '{date_to_search}'"
+            results = self.run_query(container_name, query)
+            return results
+        missing = []
+        if not container_name:
+            missing.append("container_name")
+        if not date_to_search:
+            missing.append("date_to_search")
+        print(f"Missing required parameter(s): {', '.join(missing)}.")
+        return None
+
+    def delete_container(self, container_name: str) -> True:
+        """
+        Deletes the specified container.
+        client.delete_container(CONTAINER_NAME)
+        """
+
+        if self.database_client and container_name:
+            try:
+                self.database_client.delete_container(container_name)
+                print(f"Container '{container_name}' deleted successfully.")
+                return True
+            except exceptions.CosmosResourceNotFoundError:
+                print(f"Container '{container_name}' not found.")
+            except exceptions.CosmosHttpResponseError as e:
+                print(f"Error deleting container '{container_name}': {e}")
+            except Exception as e:
+                print(f"An unexpected error occurred during container deletion: {e}")
+
+        if not self.database_client:
+            print("Cannot delete container: Not connected to database.")
+            return False
+        if not container_name:
+            print("Cannot delete container: No container name provided.")
+            return False
+
+    def create_container(
+        self,
+        container_name: str,
+    ) -> Optional[Any]:
+        if container_name and self.database_client:
+            vector_embedding_policy = {
+                "vectorEmbeddings": [
+                    {
+                        "path": "/embedding",
+                        "dataType": "float32",
+                        "dimensions": 1024,
+                        "distanceFunction": "cosine",
+                    }
+                ]
+            }
+
+            full_text_policy = {
+                "defaultLanguage": "en-US",
+                "fullTextPaths": [{"path": "/text", "language": "en-US"}],
+            }
+
+            # Indexing policy (as provided by the user)
+            indexing_policy = {
+                "indexingMode": "consistent",
+                "automatic": True,
+                "includedPaths": [{"path": "/*"}],
+                "excludedPaths": [{"path": '/"_etag"/?'}, {"path": "/embedding/*"}],
+                "vectorIndexes": [{"path": "/embedding", "type": "quantizedFlat"}],
+                "fullTextIndexes": [{"path": "/text"}],
+            }
+
+            try:
+                container = self.database_client.create_container_if_not_exists(
+                    id=self.container_name,
+                    partition_key=PartitionKey(path=self.partition_key_path),
+                    vector_embedding_policy=vector_embedding_policy,
+                    indexing_policy=indexing_policy,
+                    full_text_policy=full_text_policy,
+                )
+                print(f"Container '{self.container_name}' created or already exists.")
+                return container
+            except exceptions.CosmosResourceExistsError:
+                print(f"Container '{self.container_name}' already exists.")
+                return self.database_client.get_container_client(self.container_name)
+            except exceptions.CosmosHttpResponseError as e:
+                print(f"Error creating container '{self.container_name}': {e}")
+                return None
+            except Exception as e:
+                print(f"An unexpected error occurred during container creation: {e}")
+                return None
+
+        if not self.database_client:
+            print("Cannot create container: Not connected to database.")
+            return False
+        if not container_name:
+            print("Cannot create container: No container name provided.")
+            return False
+
+
+'''
+
+
+    def create_knowledge_chunks_container(self):
+        """
+        Creates the 'knowledge_chunks' container with specified policies if it doesn't exist.
+        client.create_knowledge_chunks_container()
+        """
+        if not self.database_client:
+            print("Cannot create container: Not connected to database.")
+            return
+
         try:
-            # Assuming query_items returns an iterable; adjust if using async client
-            for item in self.container_client.query_items(
-                query=query, enable_cross_partition_query=True
-            ):
-                results.append(item)
-            # print(f"Found {len(results)} results for vector search.")
-            # return results[:top_k]  # Return top_k results
-
+            container = self.database_client.create_container_if_not_exists(
+                id=self.container_name,
+                partition_key=PartitionKey(path=self.partition_key_path),
+                vector_embedding_policy=self.vector_embedding_policy,
+                indexing_policy=self.indexing_policy,
+                full_text_policy=full_text_policy,
+            )
+            print(f"Container '{self.container_name}' created or already exists.")
+            return container
+        except exceptions.CosmosResourceExistsError:
+            print(f"Container '{self.container_name}' already exists.")
+            return self.database_client.get_container_client(self.container_name)
         except exceptions.CosmosHttpResponseError as e:
-            print(f"Error during vector search: {e}")
-            results = []
+            print(f"Error creating container '{self.container_name}': {e}")
+            return None
+        except Exception as e:
+            print(f"An unexpected error occurred during container creation: {e}")
+            return None
 
-        return results[0]
 
-    def get_notes_from_day(self, date_to_search: str):
+
+
+        if not self.database_client:
+            print("Cannot delete container: Not connected to database.")
+            return
+
+    def get_notes_from_day_old(self, date_to_search: str):
         """Retrieves the last N notes from Cosmos DB."""
         if not self.container_client:
             print("Cosmos DB container client not available.")
@@ -118,6 +268,7 @@ class SimpleCosmosClient:
         except Exception as e:
             print(f"An unexpected error occurred during query: {e}")
             return []
+'''
 
 
 class LargeCosmosClient:
@@ -142,7 +293,7 @@ class LargeCosmosClient:
         self.indexing_policy = indexing_policy
         self.cosmos_client = None
         self.database_client = None
-        self.container_client = None
+        # self.container_client = None
 
     def connect(self):
         """
