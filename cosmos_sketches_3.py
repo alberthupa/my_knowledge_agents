@@ -19,7 +19,6 @@ https://gemini.google.com/app/362b4f461787e386
 COSMOS_CONNECTION_STRING = os.environ.get("COSMOS_CONNECTION_STRING")
 DATABASE_NAME = "hupi-loch"
 PARTITION_KEY_PATH = "/id"
-# CONTAINER_NAME = "knowledge-chunks"
 
 
 def make_piece_id(parent_id: str, headline: str) -> str:
@@ -34,7 +33,8 @@ cosmos_client = SimpleCosmosClient(
 )
 
 cosmos_client.connect()
-
+pieces = cosmos_client.database_client.get_container_client("knowledge-pieces")
+chunks = cosmos_client.database_client.get_container_client("knowledge-chunks")
 
 StrList = List[str]
 
@@ -101,8 +101,7 @@ if cosmos_client:
     done_ids = cosmos_client.run_query(
         container_name="knowledge-pieces", query="SELECT VALUE p.id FROM p"
     )
-    pieces = cosmos_client.database_client.get_container_client("knowledge-pieces")
-    chunks = cosmos_client.database_client.get_container_client("knowledge-chunks")
+
     chunks_to_do = chunks.query_items(
         query="""
             SELECT TOP 1 *
@@ -116,7 +115,6 @@ if cosmos_client:
     chunk_to_do = list(chunks_to_do)[0]
 
     print(f"Chunk to do: {chunk_to_do['id']}")
-    # print(chunk_to_do)
     message = message_template.format(text=chunk_to_do["text"])
     cleaned_payload = query_llm(message, BasicAgent())
 
@@ -130,20 +128,16 @@ if cosmos_client:
     pieces_to_paste = {k: v for k, v in chunk_to_do.items() if k in keys_to_copy}
 
     for headline, summary in cleaned_payload.items():
-        piece_to_paste = pieces_to_paste.copy()  # id, source, dates, …
+        piece_to_paste = pieces_to_paste.copy()
         piece_to_paste["parent_id"] = chunk_to_do["id"]
-
-        # stable, human‐readable id
         piece_to_paste["id"] = make_piece_id(chunk_to_do["id"], headline)
-
         piece_to_paste["headline"] = headline
         for k, v in summary.model_dump().items():
-            if k != "id":  # avoid clashing with our own id
+            if k != "id":
                 piece_to_paste[k] = v
 
         pieces.upsert_item(
-            piece_to_paste,  # idempotent write
-            # partition_key=piece_to_paste["id"],
+            piece_to_paste,
         )
 
 
