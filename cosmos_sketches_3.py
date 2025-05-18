@@ -8,6 +8,7 @@ from typing import Dict, List
 from src.vectors.cosmos_client import SimpleCosmosClient
 from src.llms.basic_agent import BasicAgent
 import json
+import hashlib
 
 """
 https://chatgpt.com/c/6824f32a-2c70-800a-8080-e55fd2007674
@@ -19,6 +20,11 @@ COSMOS_CONNECTION_STRING = os.environ.get("COSMOS_CONNECTION_STRING")
 DATABASE_NAME = "hupi-loch"
 PARTITION_KEY_PATH = "/id"
 # CONTAINER_NAME = "knowledge-chunks"
+
+
+def make_piece_id(parent_id: str, headline: str) -> str:
+    digest = hashlib.sha1(headline.encode("utf-8")).hexdigest()[:12]
+    return f"{parent_id}_{digest}"
 
 
 cosmos_client = SimpleCosmosClient(
@@ -54,6 +60,7 @@ def query_llm(
 ) -> Dict[str, Summary]:
     p = prompt
     for _ in range(max_tries):
+        print(f"attempt {_ + 1} of {max_tries}")
         txt = agent.get_text_response_from_llm(model, messages=p, code_tag=None)[
             "text_response"
         ]
@@ -72,8 +79,8 @@ def query_llm(
     raise RuntimeError("Failed to obtain valid payload after 3 attempts.")
 
 
-message_template = """This is a content of last newslettters about AI: {text}.
-    Extract news and opinions about AI related topics from the text. Accompany it with keywords organized into topics:
+message_template = """This is a content of last newslettters about AI: {text}. #####
+    Your task is to extract news and opinions about AI related topics from the text. Accompany it with keywords organized into topics:
     {{
         "... news headline ..." : {{
             "news": "Gemini 2.0 has been released with new features.",
@@ -91,16 +98,70 @@ message_template = """This is a content of last newslettters about AI: {text}.
 
 
 if cosmos_client:
-    last_date = cosmos_client.get_last_date("knowledge-chunks")
-    print(f"Last date: {last_date}")
-    last_notes = cosmos_client.get_notes_from_day("knowledge-chunks", last_date)
-    if len(last_notes) == 0:
-        print("No notes found.")
-        exit(1)
-    else:
-        for note in last_notes:
-            message = message_template.format(text=note["text"])
-            cleaned_payload = query_llm(message, BasicAgent())
-            for tag, summary in cleaned_payload.items():
-                if len(summary.companies) > 0:
-                    print(f"Companies: {summary.companies}")
+    done_ids = cosmos_client.run_query(
+        container_name="knowledge-pieces", query="SELECT VALUE p.id FROM p"
+    )
+    pieces = cosmos_client.database_client.get_container_client("knowledge-pieces")
+    chunks = cosmos_client.database_client.get_container_client("knowledge-chunks")
+    chunks_to_do = chunks.query_items(
+        query="""
+            SELECT TOP 1 *
+            FROM c
+            WHERE NOT ARRAY_CONTAINS(@done, c.id)
+            ORDER BY c.chunk_date  
+        """,
+        parameters=[{"name": "@done", "value": list(done_ids)}],
+        enable_cross_partition_query=True,
+    )
+    chunk_to_do = list(chunks_to_do)[0]
+
+    print(f"Chunk to do: {chunk_to_do['id']}")
+    # print(chunk_to_do)
+    message = message_template.format(text=chunk_to_do["text"])
+    cleaned_payload = query_llm(message, BasicAgent())
+
+    keys_to_copy = {
+        "id",
+        "source",
+        "chunk_date",
+        "processing_target_date",
+    }
+
+    pieces_to_paste = {k: v for k, v in chunk_to_do.items() if k in keys_to_copy}
+
+    for headline, summary in cleaned_payload.items():
+        piece_to_paste = pieces_to_paste.copy()  # id, source, dates, …
+        piece_to_paste["parent_id"] = chunk_to_do["id"]
+
+        # stable, human‐readable id
+        piece_to_paste["id"] = make_piece_id(chunk_to_do["id"], headline)
+
+        piece_to_paste["headline"] = headline
+        for k, v in summary.model_dump().items():
+            if k != "id":  # avoid clashing with our own id
+                piece_to_paste[k] = v
+
+        pieces.upsert_item(
+            piece_to_paste,  # idempotent write
+            # partition_key=piece_to_paste["id"],
+        )
+
+
+"""
+last_date = cosmos_client.get_last_date("knowledge-chunks")
+print(f"Last date: {last_date}")
+last_notes = cosmos_client.get_notes_from_day("knowledge-chunks", last_date)
+if len(last_notes) == 0:
+    print("No notes found.")
+
+else:
+    for note in last_notes:
+        print(note["id"])
+        # message = message_template.format(text=note["text"])
+        # cleaned_payload = query_llm(message, BasicAgent())
+        # for tag, summary in cleaned_payload.items():
+        #    print(f"Tag: {tag}")
+        #    print(f"News: {summary}")
+        #    # if len(summary.companies) > 0:
+        #    #    print(f"Companies: {summary.companies}")
+"""

@@ -177,19 +177,19 @@ class SimpleCosmosClient:
 
             try:
                 container = self.database_client.create_container_if_not_exists(
-                    id=self.container_name,
+                    id=container_name,
                     partition_key=PartitionKey(path=self.partition_key_path),
                     vector_embedding_policy=vector_embedding_policy,
                     indexing_policy=indexing_policy,
                     full_text_policy=full_text_policy,
                 )
-                print(f"Container '{self.container_name}' created or already exists.")
+                print(f"Container '{container_name}' created or already exists.")
                 return container
             except exceptions.CosmosResourceExistsError:
                 print(f"Container '{self.container_name}' already exists.")
-                return self.database_client.get_container_client(self.container_name)
+                return self.database_client.get_container_client(container_name)
             except exceptions.CosmosHttpResponseError as e:
-                print(f"Error creating container '{self.container_name}': {e}")
+                print(f"Error creating container '{container_name}': {e}")
                 return None
             except Exception as e:
                 print(f"An unexpected error occurred during container creation: {e}")
@@ -202,6 +202,22 @@ class SimpleCosmosClient:
             print("Cannot create container: No container name provided.")
             return False
 
+
+COSMOS_CONNECTION_STRING = os.environ.get("COSMOS_CONNECTION_STRING")
+DATABASE_NAME = "hupi-loch"
+PARTITION_KEY_PATH = "/id"
+# CONTAINER_NAME = "knowledge-chunks"
+
+
+cosmos_client = SimpleCosmosClient(
+    connection_string=COSMOS_CONNECTION_STRING,
+    database_name=DATABASE_NAME,
+    partition_key_path=PARTITION_KEY_PATH,
+)
+
+cosmos_client.connect()
+
+# cosmos_client.create_container("knowledge-pieces")
 
 '''
 
@@ -450,13 +466,14 @@ class LargeCosmosClient:
 
 
 # Configuration variables (as provided by the user)
-COSMOS_CONNECTION_STRING = os.environ.get("COSMOS_CONNECTION_STRING")
-DATABASE_NAME = "hupi-loch"
-CONTAINER_NAME = "knowledge-chunks"
+# COSMOS_CONNECTION_STRING = os.environ.get("COSMOS_CONNECTION_STRING")
+# DATABASE_NAME = "hupi-loch"
+# CONTAINER_NAME = "knowledge-chunks"
 # CONTAINER_NAME = "test_container"
-PARTITION_KEY_PATH = "/id"
+# PARTITION_KEY_PATH = "/id"
 
 # Vector embedding policy (as provided by the user)
+'''
 vector_embedding_policy = {
     "vectorEmbeddings": [
         {
@@ -523,3 +540,4 @@ if __name__ == "__main__":
             WHERE c.chunk_date >= "2025-05-04"
             order by c.chunk_date desc
             """
+'''
