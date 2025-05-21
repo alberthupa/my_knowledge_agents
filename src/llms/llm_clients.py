@@ -150,3 +150,6 @@ def get_and_print_openai_models():
                 "%Y-%m-%d %H:%M:%S"
             )
             print(f"id='{model.id}', created='{created_date}'")
+
+
+# get_and_print_openai_models()

@@ -10,6 +10,11 @@ from src.llms.basic_agent import BasicAgent
 import json
 import hashlib
 
+
+from tqdm import tqdm
+import time
+
+
 """
 https://chatgpt.com/c/6824f32a-2c70-800a-8080-e55fd2007674
 https://gemini.google.com/app/362b4f461787e386
@@ -21,11 +26,6 @@ DATABASE_NAME = "hupi-loch"
 PARTITION_KEY_PATH = "/id"
 
 
-def make_piece_id(parent_id: str, headline: str) -> str:
-    digest = hashlib.sha1(headline.encode("utf-8")).hexdigest()[:12]
-    return f"{parent_id}_{digest}"
-
-
 cosmos_client = SimpleCosmosClient(
     connection_string=COSMOS_CONNECTION_STRING,
     database_name=DATABASE_NAME,
@@ -35,6 +35,7 @@ cosmos_client = SimpleCosmosClient(
 cosmos_client.connect()
 pieces = cosmos_client.database_client.get_container_client("knowledge-pieces")
 chunks = cosmos_client.database_client.get_container_client("knowledge-chunks")
+
 
 StrList = List[str]
 
@@ -56,7 +57,11 @@ class Payload(RootModel):
 
 
 def query_llm(
-    prompt: str, agent, model: str = "gemini-2.0-flash-exp", max_tries: int = 3
+    # prompt: str, agent, model: str = "gemini-2.0-flash-exp", max_tries: int = 3
+    prompt: str,
+    agent,
+    model: str = "gemini-2.0-flash-exp",
+    max_tries: int = 3,
 ) -> Dict[str, Summary]:
     p = prompt
     for _ in range(max_tries):
@@ -97,34 +102,111 @@ message_template = """This is a content of last newslettters about AI: {text}. #
 """
 
 
+def make_piece_id(parent_id: str, headline: str) -> str:
+    digest = hashlib.sha1(headline.encode("utf-8")).hexdigest()[:12]
+    return f"{parent_id}_{digest}"
+
+
+keys_to_copy = [
+    "id",
+    "source",
+    "chunk_date",
+    "processing_target_date",
+]
+
+query_to_get_a_note = """
+    SELECT TOP 1000 *
+    FROM c
+    WHERE NOT ARRAY_CONTAINS(@done, c.id)
+    ORDER BY c.chunk_date  
+"""
+
+
+def process_chunk(chunk_to_do, done_ids):
+    try:
+        print(f"Processing chunk: {chunk_to_do['id']}")
+        message = message_template.format(text=chunk_to_do["text"])
+        cleaned_payload = query_llm(message, BasicAgent(), model="priv_openai:gpt-4.1")
+        # cleaned_payload = query_llm(message, BasicAgent(), model="gemini-2.0-flash-exp")
+        pieces_to_paste = {k: v for k, v in chunk_to_do.items() if k in keys_to_copy}
+        for headline, summary in cleaned_payload.items():
+            piece_to_paste = pieces_to_paste.copy()
+            piece_to_paste["parent_id"] = chunk_to_do["id"]
+            piece_to_paste["id"] = make_piece_id(chunk_to_do["id"], headline)
+            piece_to_paste["headline"] = headline
+            for k, v in summary.model_dump().items():
+                if k != "id":
+                    piece_to_paste[k] = v
+            pieces.upsert_item(piece_to_paste)
+        return True
+    except Exception as e:
+        print(f"Error processing chunk {chunk_to_do['id']}: {e}")
+        return False
+
+
+if cosmos_client:
+    done_ids = pieces.query_items(
+        query="SELECT VALUE p.parent_id FROM p",
+        enable_cross_partition_query=True,
+    )
+    list_done_ids = list(done_ids)
+    # print(list_done_ids)
+    print("----")
+    print(f"len done_ids: {len(list_done_ids)}")
+    print(type(list_done_ids))
+
+    chunks_to_do = chunks.query_items(
+        query=query_to_get_a_note,
+        parameters=[{"name": "@done", "value": list(list_done_ids)}],
+        enable_cross_partition_query=True,
+    )
+    chunks_to_do = list(chunks_to_do)
+
+    with tqdm(total=len(chunks_to_do), desc="Processing chunks") as pbar:
+        for chunk_to_do in chunks_to_do:
+            if process_chunk(chunk_to_do, done_ids):
+                pbar.update(1)
+            else:
+                time.sleep(2)  # Optional: backoff on error
+
+"""
+
+id='codex-mini-latest', created='2025-05-08 05:00:57'
+id='gpt-image-1', created='2025-04-24 19:50:30'
+id='gpt-4.1-nano', created='2025-04-10 23:48:27'
+id='gpt-4.1-nano-2025-04-14', created='2025-04-10 23:37:05'
+id='gpt-4.1-mini', created='2025-04-10 22:49:33'
+id='gpt-4.1-mini-2025-04-14', created='2025-04-10 22:39:07'
+id='gpt-4.1', created='2025-04-10 22:22:22'
+id='gpt-4.1-2025-04-14', created='2025-04-10 22:09:06'
+id='o4-mini', created='2025-04-09 21:02:31'
+id='o4-mini-2025-04-16', created='2025-04-08 19:31:46'
+id='gpt-4o-mini-tts', created='2025-03-19 18:05:59'
+id='o1-pro', created='2025-03-17 23:49:51'
+id='o1-pro-2025-03-19', created='2025-03-17 23:45:04'
+id='gpt-4o-mini-transcribe', created='2025-03-15 20:56:36'
+id='gpt-4o-transcribe', created='2025-03-15 20:54:23'
+id='gpt-4o-mini-search-preview', created='2025-03-08 00:46:01'
+id='gpt-4o-mini-search-preview-2025-03-11', created='2025-03-08 00:40:58'
+id='gpt-4o-search-preview', created='2025-03-08 00:05:20'
+id='gpt-4o-search-preview-2025-03-11', created='2025-03-07 23:56:10'
+
 if cosmos_client:
     done_ids = cosmos_client.run_query(
         container_name="knowledge-pieces", query="SELECT VALUE p.id FROM p"
     )
 
     chunks_to_do = chunks.query_items(
-        query="""
-            SELECT TOP 1 *
-            FROM c
-            WHERE NOT ARRAY_CONTAINS(@done, c.id)
-            ORDER BY c.chunk_date  
-        """,
+        query=query_to_get_a_note,
         parameters=[{"name": "@done", "value": list(done_ids)}],
         enable_cross_partition_query=True,
     )
     chunk_to_do = list(chunks_to_do)[0]
 
     print(f"Chunk to do: {chunk_to_do['id']}")
+
     message = message_template.format(text=chunk_to_do["text"])
     cleaned_payload = query_llm(message, BasicAgent())
-
-    keys_to_copy = {
-        "id",
-        "source",
-        "chunk_date",
-        "processing_target_date",
-    }
-
     pieces_to_paste = {k: v for k, v in chunk_to_do.items() if k in keys_to_copy}
 
     for headline, summary in cleaned_payload.items():
@@ -138,8 +220,7 @@ if cosmos_client:
 
         pieces.upsert_item(
             piece_to_paste,
-        )
-
+"""
 
 """
 last_date = cosmos_client.get_last_date("knowledge-chunks")
