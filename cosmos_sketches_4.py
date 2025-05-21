@@ -12,6 +12,8 @@ DATABASE_NAME = "hupi-loch"
 PARTITION_KEY_PATH = "/id"
 
 # --- Configuration ---
+DEBUG_PRINT = False  # Set to False to suppress detailed statistical prints
+
 KEYWORD_FIELDS = [
     "keywords",
     "companies",
@@ -49,14 +51,44 @@ cosmos_client.connect()
 container = cosmos_client.database_client.get_container_client("knowledge-pieces")
 
 
-def get_mock_items_for_date_range(start_date_str, end_date_str):
-    # print(f"MOCK FETCH: Querying items from {start_date_str} to {end_date_str}")
+def get_items_for_date_range(start_date_str, end_date_str):
     query = f"SELECT c.id, c.chunk_date, {', '.join(['c.' + f for f in KEYWORD_FIELDS])} FROM c WHERE c.chunk_date >= '{start_date_str}' AND c.chunk_date <= '{end_date_str}'"
-    # query = f"SELECT c.id, c.chunk_date, {', '.join(['c.' + f for f in KEYWORD_FIELDS])} FROM c"
-    # print(query)
     items = list(container.query_items(query=query, enable_cross_partition_query=True))
     print(f"Found {len(items)} items.")
     return items
+
+
+def get_headlines_for_keyword(keyword_text, keyword_field_name, start_date_str, end_date_str, container_client, limit=3):
+    """
+    Fetches up to 'limit' distinct headlines for a given keyword and field within a date range.
+    """
+    if not keyword_text or not keyword_field_name:
+        return []
+
+    # Escape single quotes in keyword_text for SQL query
+    escaped_keyword_text = keyword_text.replace("'", "''")
+
+    # Construct the query
+    # Ensure the keyword_field_name is a valid field and not arbitrary input
+    if keyword_field_name not in KEYWORD_FIELDS:
+        print(f"Warning: Invalid keyword_field_name '{keyword_field_name}' provided to get_headlines_for_keyword.")
+        return []
+
+    query = (
+        f"SELECT DISTINCT TOP {limit} c.headline "
+        f"FROM c "
+        f"WHERE c.chunk_date >= '{start_date_str}' AND c.chunk_date <= '{end_date_str}' "
+        f"AND ARRAY_CONTAINS(c.{keyword_field_name}, '{escaped_keyword_text}', true)" # Using true for case-insensitive check if desired, or remove for exact match
+    )
+    # print(f"Headline query: {query}") # For debugging
+
+    try:
+        query_results = list(container_client.query_items(query=query, enable_cross_partition_query=True))
+        headlines = [item['headline'] for item in query_results if 'headline' in item and item['headline']]
+        return headlines
+    except Exception as e:
+        print(f"Error fetching headlines for '{keyword_text}' in field '{keyword_field_name}': {e}")
+        return []
 
 
 # --- Date Utilities ---
@@ -213,12 +245,77 @@ def calculate_adjusted_baseline_counts(
     return adjusted_avg_counts
 
 
+# --- Helper for Report Formatting ---
+def format_trend_report_section(
+    title,
+    keyword_data_list,
+    item_type,  # "new" or "growing"
+    date_ranges_for_windows,
+    current_win_name,
+    container_client, # Passed as 'container' from main
+    significant_increase_threshold_for_title=None, # For "Rapidly Growing" title
+    top_n_details=TOP_N_FOR_EMERGING_TREND_DETAILS,
+    fetch_headlines_top_n=3, # Number of top items to fetch headlines for
+    debug_print_mode=DEBUG_PRINT
+):
+    lines = []
+    if item_type == "growing" and significant_increase_threshold_for_title is not None:
+        lines.append(f"\n  {title} (Factor >= {significant_increase_threshold_for_title}x, vs. avg. of prior periods from baseline):")
+    else:
+        lines.append(f"\n  {title}:")
+
+    if not keyword_data_list:
+        lines.append("    No keywords found for this category.")
+        return lines
+
+    report_start_date = date_ranges_for_windows[current_win_name]['start']
+    report_end_date = date_ranges_for_windows[current_win_name]['end']
+
+    for i, item in enumerate(keyword_data_list[:top_n_details]):
+        base_info = f"    - {item['keyword']} (from {item['field'].replace('_',' ').title()})"
+        if item_type == "new":
+            if debug_print_mode:
+                lines.append(f"{base_info} - Count: {item['count']}")
+            else:
+                lines.append(base_info)
+        elif item_type == "growing":
+            if debug_print_mode:
+                lines.append(f"{base_info} - Now: {item['current_count']}, Avg. Prior: {item['prev_avg']:.2f}, Factor: {item['factor']:.2f}x")
+            else:
+                lines.append(base_info)
+
+        if i < fetch_headlines_top_n: 
+            headlines = get_headlines_for_keyword(
+                item['keyword'],
+                item['field'],
+                report_start_date,
+                report_end_date,
+                container_client, 
+                limit=3 # Original logic fetched 3 headlines
+            )
+            if headlines:
+                lines.append(f"      Examples for '{item['keyword']}':")
+                for idx, headline_text in enumerate(headlines):
+                    lines.append(f"        {idx+1}. {headline_text}")
+    
+    if len(keyword_data_list) > top_n_details:
+        lines.append(
+            f"    ... and {len(keyword_data_list) - top_n_details} more."
+        )
+    return lines
+
+
 # --- Main Orchestration ---
 def main():
     execution_date = datetime.date.today()
     print(
         f"Trend Analysis Report for data up to: {(execution_date - datetime.timedelta(days=1)).strftime('%Y-%m-%d')}\n"
     )
+
+    # Initialize report string variables
+    daily_trends_report_str = ""
+    weekly_trends_report_str = ""
+    monthly_trends_report_str = ""
 
     date_ranges_for_windows = get_date_ranges(execution_date)
     all_window_counts = {}
@@ -229,7 +326,7 @@ def main():
         print(
             f"\nProcessing: {window_name.upper()} (From {dates['start']} to {dates['end']})"
         )
-        items_for_window = get_mock_items_for_date_range(dates["start"], dates["end"])
+        items_for_window = get_items_for_date_range(dates["start"], dates["end"])
 
         if not items_for_window:
             print(f"No items found for {window_name} window.")
@@ -270,19 +367,28 @@ def main():
     ]
 
     for config in trend_comparison_configs:
-        print(f"--- {config['name']} ---")
+        current_report_lines = []
+        report_name = config['name']
+        current_report_lines.append(f"--- {report_name} ---")
+
         current_win = config["current_period"]
         baseline_win = config["baseline_period"]
 
+        # Conditional checks remain, printing to console for immediate feedback during script run
         if (
             current_win not in all_window_counts
             or baseline_win not in all_window_counts
             or not all_window_counts[current_win]
             or not all_window_counts[baseline_win]
-        ):  # check if counters are not empty
+        ):
             print(
-                f"Insufficient data for {current_win} or {baseline_win} period. Skipping {config['name']}.\n"
+                f"Insufficient data for {current_win} or {baseline_win} period. Skipping {report_name}.\n"
             )
+            current_report_lines.append(f"\nInsufficient data for {current_win} or {baseline_win} period. Report generation skipped.")
+            current_report_lines.append("\n" + "=" * 60 + "\n")
+            if report_name == "Daily Emerging Trends": daily_trends_report_str = "\n".join(current_report_lines)
+            elif report_name == "Weekly Emerging Trends": weekly_trends_report_str = "\n".join(current_report_lines)
+            elif report_name == "Monthly Emerging Trends": monthly_trends_report_str = "\n".join(current_report_lines)
             continue
 
         current_counts = all_window_counts[current_win]
@@ -292,48 +398,54 @@ def main():
 
         if days_baseline <= days_current:
             print(
-                f"Baseline window ('{baseline_win}') must be longer than current window ('{current_win}'). Skipping.\n"
+                f"Baseline window ('{baseline_win}') must be longer than current window ('{current_win}'). Skipping {report_name}.\n"
             )
+            current_report_lines.append(f"\nBaseline window ('{baseline_win}') must be longer than current window ('{current_win}'). Report generation skipped.")
+            current_report_lines.append("\n" + "=" * 60 + "\n")
+            if report_name == "Daily Emerging Trends": daily_trends_report_str = "\n".join(current_report_lines)
+            elif report_name == "Weekly Emerging Trends": weekly_trends_report_str = "\n".join(current_report_lines)
+            elif report_name == "Monthly Emerging Trends": monthly_trends_report_str = "\n".join(current_report_lines)
             continue
 
         adjusted_baseline = calculate_adjusted_baseline_counts(
             current_counts, baseline_counts, days_current, days_baseline
         )
 
-        if not adjusted_baseline:  # Check if baseline calculation yielded results
+        if not adjusted_baseline:
             print(
-                f"Could not calculate a valid adjusted baseline from '{baseline_win}' for '{current_win}'. Skipping.\n"
+                f"Could not calculate a valid adjusted baseline from '{baseline_win}' for '{current_win}'. Skipping {report_name}.\n"
             )
+            current_report_lines.append(f"\nCould not calculate a valid adjusted baseline from '{baseline_win}' for '{current_win}'. Report generation skipped.")
+            current_report_lines.append("\n" + "=" * 60 + "\n")
+            if report_name == "Daily Emerging Trends": daily_trends_report_str = "\n".join(current_report_lines)
+            elif report_name == "Weekly Emerging Trends": weekly_trends_report_str = "\n".join(current_report_lines)
+            elif report_name == "Monthly Emerging Trends": monthly_trends_report_str = "\n".join(current_report_lines)
             continue
 
         period_trends = compare_trends(
             current_counts, adjusted_baseline, SIGNIFICANT_INCREASE_THRESHOLD
         )
 
-        # Flatten and print "Newly Appearing"
         all_newly_emerging = []
         for field, kws_data in period_trends["newly_emerging"].items():
-            for kw, count in kws_data:
+            for kw, count_val in kws_data: # Renamed count to count_val
                 all_newly_emerging.append(
-                    {"keyword": kw, "field": field, "count": count}
+                    {"keyword": kw, "field": field, "count": count_val}
                 )
-
         all_newly_emerging.sort(key=lambda x: x["count"], reverse=True)
+        
+        current_report_lines.extend(format_trend_report_section(
+            title="Newly Appearing Keywords (vs. avg. of prior periods from baseline)",
+            keyword_data_list=all_newly_emerging,
+            item_type="new",
+            date_ranges_for_windows=date_ranges_for_windows,
+            current_win_name=current_win,
+            container_client=container, # Pass the global container client
+            debug_print_mode=DEBUG_PRINT,
+            top_n_details=TOP_N_FOR_EMERGING_TREND_DETAILS,
+            fetch_headlines_top_n=3 
+        ))
 
-        print("\n  Newly Appearing Keywords (vs. avg. of prior periods from baseline):")
-        if not all_newly_emerging:
-            print("    No newly appearing keywords found.")
-        else:
-            for item in all_newly_emerging[:TOP_N_FOR_EMERGING_TREND_DETAILS]:
-                print(
-                    f"    - {item['keyword']} (from {item['field'].replace('_',' ').title()}) - Count: {item['count']}"
-                )
-            if len(all_newly_emerging) > TOP_N_FOR_EMERGING_TREND_DETAILS:
-                print(
-                    f"    ... and {len(all_newly_emerging) - TOP_N_FOR_EMERGING_TREND_DETAILS} more."
-                )
-
-        # Flatten and print "Rapidly Growing"
         all_significantly_increased = []
         for field, kws_data in period_trends["significantly_increased"].items():
             for kw, cur_count, prev_avg, factor in kws_data:
@@ -346,29 +458,43 @@ def main():
                         "factor": factor,
                     }
                 )
-
-        # Sort by factor (desc), then current_count (desc)
         all_significantly_increased.sort(
             key=lambda x: (x["factor"], x["current_count"]), reverse=True
         )
 
-        print(
-            f"\n  Rapidly Growing Keywords (Factor >= {SIGNIFICANT_INCREASE_THRESHOLD}x, vs. avg. of prior periods from baseline):"
-        )
-        if not all_significantly_increased:
-            print("    No rapidly growing keywords found.")
-        else:
-            for item in all_significantly_increased[:TOP_N_FOR_EMERGING_TREND_DETAILS]:
-                print(
-                    f"    - {item['keyword']} (from {item['field'].replace('_',' ').title()}) - Now: {item['current_count']}, Avg. Prior: {item['prev_avg']:.2f}, Factor: {item['factor']:.2f}x"
-                )
-            if len(all_significantly_increased) > TOP_N_FOR_EMERGING_TREND_DETAILS:
-                print(
-                    f"    ... and {len(all_significantly_increased) - TOP_N_FOR_EMERGING_TREND_DETAILS} more."
-                )
-        print("\n" + "=" * 60 + "\n")
+        current_report_lines.extend(format_trend_report_section(
+            title="Rapidly Growing Keywords",
+            keyword_data_list=all_significantly_increased,
+            item_type="growing",
+            date_ranges_for_windows=date_ranges_for_windows,
+            current_win_name=current_win,
+            container_client=container, # Pass the global container client
+            significant_increase_threshold_for_title=SIGNIFICANT_INCREASE_THRESHOLD,
+            debug_print_mode=DEBUG_PRINT,
+            top_n_details=TOP_N_FOR_EMERGING_TREND_DETAILS,
+            fetch_headlines_top_n=3
+        ))
+        
+        current_report_lines.append("\n" + "=" * 60 + "\n")
 
-    print("Trend analysis complete.")
+        if report_name == "Daily Emerging Trends":
+            daily_trends_report_str = "\n".join(current_report_lines)
+        elif report_name == "Weekly Emerging Trends":
+            weekly_trends_report_str = "\n".join(current_report_lines)
+        elif report_name == "Monthly Emerging Trends":
+            monthly_trends_report_str = "\n".join(current_report_lines)
+
+    print("Trend analysis complete.") # This is the clear ending of the script's active output
+
+    # --- You can uncomment the lines below to print the generated report strings ---
+    # print("\n\n--- Generated Report Strings (for verification) ---")
+    print("\n--- Daily Emerging Trends Report String ---")
+    print(daily_trends_report_str if daily_trends_report_str else "Report not generated or empty.")
+    print("\n--- Weekly Emerging Trends Report String ---")
+    print(weekly_trends_report_str if weekly_trends_report_str else "Report not generated or empty.")
+    #print("\n--- Monthly Emerging Trends Report String ---")
+    #print(monthly_trends_report_str if monthly_trends_report_str else "Report not generated or empty.")
+    # print("\n" + "=" * 60 + "\n")
 
 
 if __name__ == "__main__":
