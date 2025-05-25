@@ -9,3 +9,4 @@ key_for_git.pub
 gcp_credentials.json
 token.json
 gmail_client_secret.json
+credentials.json

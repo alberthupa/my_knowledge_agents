@@ -217,7 +217,7 @@ cosmos_client = SimpleCosmosClient(
 
 cosmos_client.connect()
 
-# cosmos_client.create_container("knowledge-pieces")
+# cosmos_client.create_container("knowledge-reports")
 
 '''
 
